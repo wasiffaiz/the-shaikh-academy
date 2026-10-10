@@ -1,0 +1,86 @@
+
+.programsPage{background:#f4f2ed;color:#111820;min-height:100vh}
+.programsPage *{box-sizing:border-box}
+.programsPage a{text-decoration:none;color:inherit}
+.programsNav{height:94px;background:#0d1727;color:#fff;display:flex;align-items:center;justify-content:space-between;padding:0 5%;gap:20px}
+.programsBrand{display:flex;align-items:center;gap:18px;font-size:13px;font-weight:700;letter-spacing:2px}
+.programsBrand img{width:76px;height:55px;object-fit:contain}
+.programsNav nav{display:flex;align-items:center;gap:32px;font-size:11px;font-weight:700;letter-spacing:1.5px}
+.programsNavBook{border:1px solid #ffffff65;padding:15px 20px;display:flex;align-items:center;gap:10px}
+.programsEyebrow{font-size:11px;font-weight:700;letter-spacing:2.4px;text-transform:uppercase}
+.programsHero{min-height:660px;background:linear-gradient(125deg,#0d1727 0%,#15263a 65%,#243c42 100%);color:#fff;padding:115px 8% 70px;position:relative;overflow:hidden}
+.programsHeroContent{max-width:950px}
+.programsHero h1{font-size:clamp(58px,9vw,145px);line-height:.93;letter-spacing:-.065em;margin:35px 0;font-weight:700}
+.programsPage h1 em,.programsPage h2 em{font-family:Georgia,serif;font-weight:400;letter-spacing:-.065em}
+.programsHero h1 em{color:#e3b18e}
+.programsHero p{max-width:530px;color:#d0d5dc;font-size:17px;line-height:1.8}
+.programsHeroLink{display:inline-flex;align-items:center;gap:14px;border-bottom:1px solid #fff;padding:18px 0;margin-top:25px;font-size:12px;font-weight:700;letter-spacing:1.5px}
+.programsHeroIndex{position:absolute;right:8%;bottom:50px;font-size:11px;letter-spacing:3px;color:#b5c0c8}
+.programsSection{padding:110px 8%}
+.programsSectionIntro{display:grid;grid-template-columns:1.1fr 1fr;gap:15px 70px;margin-bottom:70px}
+.programsSectionIntro .programsEyebrow{grid-column:1/-1}
+.programsSectionIntro h2,.methodHeading h2{font-size:clamp(50px,7vw,105px);line-height:.98;letter-spacing:-.065em;margin:18px 0}
+.programsSectionIntro>p{max-width:450px;align-self:end;color:#60676c;line-height:1.9;font-size:16px}
+.programItem{display:grid;grid-template-columns:70px 1fr 55px;gap:25px;padding:37px 0;border-top:1px solid #b8b9b7}
+.programItem:last-child{border-bottom:1px solid #b8b9b7}
+.programNumber{font-size:13px;color:#8c8d8a}
+.programAudience,.programDetails small{font-size:11px;letter-spacing:1.6px;color:#757b7c}
+.programDetails h3{font-size:clamp(27px,4vw,54px);letter-spacing:-.04em;line-height:1.1;margin:12px 0}
+.programDetails p{max-width:670px;color:#535b61;line-height:1.8;margin:15px 0}
+.programArrow{display:flex;justify-content:center;align-items:center;width:50px;height:50px;border:1px solid #b8b9b7;border-radius:50%;transition:.3s}
+.programArrow:hover{background:#101a28;color:#fff}
+.programsAvailability{color:#737775;font-size:12px;margin-top:28px}
+.methodIntro{background:#101a28;color:#fff;padding:110px 8%}
+.methodIntro h2{font-size:clamp(62px,9vw,135px);line-height:.98;letter-spacing:-.06em;margin:30px 0}
+.methodIntro h2 em{color:#e3b18e}
+.methodIntro p{max-width:580px;color:#c2c8ce;line-height:1.85;font-size:17px}
+.methodSection{padding:110px 8% 130px}
+.methodHeading{margin-bottom:70px}
+.methodHeading p{max-width:540px;color:#626a6c;line-height:1.8}
+.methodStage{border-top:1px solid #b7b9b8}
+.methodStage:last-child{border-bottom:1px solid #b7b9b8}
+.methodStageTrigger{width:100%;background:none;border:0;color:inherit;cursor:pointer;display:grid;grid-template-columns:65px 1fr 35px;gap:20px;align-items:center;text-align:left;padding:33px 0}
+.methodStageNumber{font-size:13px;color:#8b8d8b}
+.methodStageTitle{font-size:clamp(22px,3.3vw,44px);font-weight:650;letter-spacing:-.035em}
+.methodStage.isOpen .methodStageTitle{color:#a7663f}
+.methodStageBody{overflow:hidden}
+.methodStageContent{padding:5px 0 48px 85px;display:grid;grid-template-columns:1fr 1fr;gap:65px}
+.methodStageDescription h3{font-family:Georgia,serif;font-size:clamp(25px,3vw,39px);font-weight:400;line-height:1.2;margin:0 0 22px}
+.methodStageDescription>p,.methodStageAssessment>p{line-height:1.85;color:#596165}
+.methodMiniLabel,.methodOutcome span{font-size:11px;letter-spacing:1.6px;font-weight:700}
+.methodStageAssessment ul{padding-left:19px;margin:18px 0 32px;color:#50595e;line-height:2}
+.methodStageAssessment li{padding-left:5px}
+.methodOutcome{border-left:2px solid #bc825c;padding:5px 0 5px 20px;margin-top:35px}
+.methodOutcome p{line-height:1.7;margin-bottom:0}
+.programsCountries{display:flex;justify-content:space-around;gap:20px;padding:34px 8%;background:#e4e1d9;font-size:12px;font-weight:700;letter-spacing:2px}
+.programsCTA{background:#101a28;color:#fff;padding:110px 8% 120px}
+.programsCTA h2{font-size:clamp(58px,8vw,115px);line-height:1;letter-spacing:-.06em;margin:35px 0}
+.programsCTA h2 em{color:#e3b18e}
+.programsCTA p{max-width:480px;line-height:1.8;color:#c0c8ce}
+.programsCTA a{display:inline-flex;align-items:center;gap:20px;background:#e3b18e;color:#101a28;padding:20px 26px;margin-top:25px;font-size:12px;font-weight:700;letter-spacing:1.4px}
+.programsFooter{background:#0c1420;color:#b5bdc7;padding:32px 8%;display:flex;justify-content:space-between;gap:20px;font-size:11px;letter-spacing:1.3px}
+.programsFooter a{display:flex;align-items:center;gap:10px}
+@media(max-width:700px){
+.programsNav{height:75px;padding:0 5%}
+.programsBrand{font-size:10px;letter-spacing:1px;gap:8px}
+.programsBrand img{width:48px;height:42px}
+.programsNav nav{gap:12px;font-size:10px}
+.programsNavBook{padding:11px 10px}
+.programsHero{min-height:580px;padding:90px 6% 65px}
+.programsHero h1{font-size:clamp(50px,12vw,78px)}
+.programsHero p{font-size:15px}
+.programsSection,.methodSection{padding:75px 6%}
+.programsSectionIntro{display:block;margin-bottom:45px}
+.programsSectionIntro h2,.methodHeading h2{font-size:clamp(52px,12vw,80px)}
+.programItem{grid-template-columns:35px 1fr 35px;gap:12px;padding:30px 0}
+.programDetails h3{font-size:29px}
+.programDetails p{font-size:14px}
+.programArrow{width:34px;height:34px}
+.methodIntro,.programsCTA{padding:85px 6%}
+.methodIntro h2{font-size:clamp(58px,12vw,90px)}
+.methodStageTrigger{grid-template-columns:35px 1fr 24px;gap:12px;padding:26px 0}
+.methodStageTitle{font-size:23px}
+.methodStageContent{padding:0 0 38px 0;grid-template-columns:1fr;gap:25px}
+.programsCountries{padding:26px 5%;font-size:9px;letter-spacing:1px}
+.programsFooter{padding:30px 6%;flex-wrap:wrap}
+}
