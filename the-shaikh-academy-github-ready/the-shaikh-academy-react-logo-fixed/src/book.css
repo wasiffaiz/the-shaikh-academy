@@ -1,0 +1,65 @@
+
+.bookPage{background:#f4f2ed;color:#111820;min-height:100vh}
+.bookPage *{box-sizing:border-box}
+.bookPage a{text-decoration:none;color:inherit}
+.bookNav{height:94px;background:#0d1727;color:#fff;display:flex;align-items:center;justify-content:space-between;padding:0 5%;gap:20px}
+.bookBrand{display:flex;align-items:center;gap:18px;font-size:13px;font-weight:700;letter-spacing:2px}
+.bookBrand img{width:76px;height:55px;object-fit:contain}
+.bookNav nav{display:flex;align-items:center;gap:30px;font-size:11px;font-weight:700;letter-spacing:1.5px}
+.bookEyebrow{font-size:11px;font-weight:700;letter-spacing:2.4px}
+.bookHero{background:linear-gradient(125deg,#0d1727,#172a3b 70%,#263c40);color:#fff;padding:120px 8% 130px}
+.bookHero h1{font-size:clamp(55px,8.5vw,130px);line-height:.95;letter-spacing:-.065em;margin:30px 0}
+.bookPage h1 em,.bookPage h2 em{font-family:Georgia,serif;font-weight:400;letter-spacing:-.06em}
+.bookHero h1 em,.bookBottom h2 em{color:#e3b18e}
+.bookHero p{max-width:570px;color:#c7d0d7;font-size:17px;line-height:1.85}
+.bookContent{display:grid;grid-template-columns:.85fr 1.15fr;gap:9%;padding:110px 8% 130px}
+.bookIntro h2{font-size:clamp(50px,6vw,92px);line-height:.98;letter-spacing:-.06em;margin:35px 0}
+.bookIntro>p{max-width:420px;color:#586268;line-height:1.9}
+.bookSteps{margin:55px 0;border-top:1px solid #c2c2bd}
+.bookSteps div{padding:23px 0;border-bottom:1px solid #c2c2bd;font-size:12px;font-weight:700;letter-spacing:1px}
+.bookSteps span{margin-right:25px;color:#a66f4e}
+.bookIntro .bookNote{font-size:13px;color:#777e80}
+.bookForm{background:#fff;padding:45px 42px;box-shadow:0 14px 60px #101a2810}
+.bookFormHeading{padding-bottom:35px;border-bottom:1px solid #dededb;margin-bottom:35px}
+.bookFormHeading h3{font-size:clamp(28px,3vw,43px);letter-spacing:-.045em;margin:16px 0 0}
+.bookFormGrid{display:grid;grid-template-columns:1fr 1fr;gap:29px 25px}
+.bookField{display:flex;flex-direction:column;gap:11px;min-width:0}
+.bookField label{font-size:10px;letter-spacing:1.5px;font-weight:700;color:#4c555b}
+.bookField input,.bookField select,.bookField textarea{width:100%;background:#fff;border:0;border-bottom:1px solid #b8bfc1;border-radius:0;padding:12px 0;color:#101a28;font:inherit;font-size:14px;outline:none}
+.bookField input:focus,.bookField select:focus,.bookField textarea:focus{border-bottom-color:#a66f4e}
+.bookField input[readonly]{color:#8a8f92}
+.bookField textarea{resize:vertical}
+.bookFull{grid-column:1/-1}
+.bookPrivacy{font-size:12px;color:#757e82;line-height:1.7;margin:30px 0}
+.bookSubmit{background:#101a28;color:#fff;border:0;padding:20px 25px;display:flex;align-items:center;justify-content:space-between;gap:25px;font-size:11px;font-weight:700;letter-spacing:1.4px;cursor:pointer;width:100%}
+.bookSubmit:hover{background:#263d50}
+.bookSubmit:disabled{opacity:.6;cursor:wait}
+.bookSuccess,.bookError{display:flex;align-items:center;gap:10px;margin-top:25px;font-size:13px;line-height:1.6}
+.bookSuccess{color:#287457}
+.bookError{color:#a13e36}
+.bookBottom{background:#101a28;color:#fff;padding:110px 8% 120px}
+.bookBottom h2{font-size:clamp(60px,8vw,115px);line-height:1;letter-spacing:-.06em;margin:35px 0}
+.bookBottom p{max-width:540px;color:#c3ccd2;line-height:1.8}
+.bookBottom a{display:inline-flex;align-items:center;gap:15px;border-bottom:1px solid #fff;padding:16px 0;margin-top:25px;font-size:12px;font-weight:700;letter-spacing:1.3px}
+.bookFooter{background:#0c1420;color:#b5bdc7;padding:32px 8%;display:flex;justify-content:space-between;gap:20px;font-size:11px;letter-spacing:1.3px}
+.bookFooter a{display:flex;align-items:center;gap:10px}
+@media(max-width:850px){
+.bookContent{grid-template-columns:1fr;gap:55px}
+.bookIntro h2{font-size:65px}
+}
+@media(max-width:600px){
+.bookNav{height:75px;padding:0 5%}
+.bookBrand{font-size:10px;letter-spacing:1px;gap:8px}
+.bookBrand img{width:48px;height:42px}
+.bookNav nav{gap:14px;font-size:10px}
+.bookHero{padding:85px 6% 95px}
+.bookHero h1{font-size:clamp(49px,11vw,75px)}
+.bookHero p{font-size:15px}
+.bookContent{padding:75px 5%}
+.bookForm{padding:35px 22px}
+.bookFormGrid{grid-template-columns:1fr}
+.bookIntro h2{font-size:55px}
+.bookBottom{padding:85px 6%}
+.bookBottom h2{font-size:clamp(54px,12vw,80px)}
+.bookFooter{padding:30px 6%;flex-wrap:wrap}
+}
