@@ -4,15 +4,8 @@ import ReactDOM from 'react-dom/client';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import App from './App';
 import Programs from './Programs';
+import Book from './Book';
 import './styles.css';
-
-function Book() {
-  return <main style={{padding:'120px 8%',minHeight:'100vh'}}>
-    <h1>BOOK A SESSION</h1>
-    <p>The Shaikh Academy — Booking enquiries coming soon.</p>
-    <a href="/">← BACK TO HOME</a>
-  </main>;
-}
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
