@@ -3,15 +3,8 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import App from './App';
+import Programs from './Programs';
 import './styles.css';
-
-function Programs() {
-  return <main style={{padding:'120px 8%',minHeight:'100vh'}}>
-    <h1>COACHING PROGRAMS</h1>
-    <p>The Shaikh Academy — Programs page coming soon.</p>
-    <a href="/">← BACK TO HOME</a>
-  </main>;
-}
 
 function Book() {
   return <main style={{padding:'120px 8%',minHeight:'100vh'}}>
