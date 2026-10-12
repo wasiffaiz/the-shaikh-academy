@@ -28,6 +28,7 @@ export default function CoachProfile() {
 
       <main className="coachProfilePage">
         <motion.section
+          key={coach.id}
           className="coachProfileHero"
           initial={{ opacity: 0, y: 35 }}
           animate={{ opacity: 1, y: 0 }}
@@ -62,10 +63,30 @@ export default function CoachProfile() {
 
         <div className="coachProfileFooter">
           <Link to="/#coaches">
-            <ArrowLeft size={16} /> BACK TO COACHES
+            <ArrowLeft size={16} />
+            BACK TO COACHES
           </Link>
+
+          <div className="coachProfileNext">
+            <span>EXPLORE OUR COACHES</span>
+
+            <div className="coachProfileNextLinks">
+              {coaches
+                .filter(c => c.id !== coach.id)
+                .map(c => (
+                  <Link
+                    key={c.id}
+                    to={'/coaches/' + c.id}
+                  >
+                    {c.name}
+                    <ArrowUpRight size={16} />
+                  </Link>
+                ))}
+            </div>
+          </div>
         </div>
       </main>
     </>
   );
 }
+
