@@ -65,8 +65,8 @@ export default function TennisCursor() {
     };
   }, []);
 
-  return (
-    <div ref={cursorRef} className="tennisCursor" aria-hidden="true">
+    return (
+     <div ref={cursorRef} className="tennisCursor" aria-hidden="true" style={{position:'fixed',top:0,left:0,width:20,height:20,pointerEvents:'none',zIndex:99999}}>
       <svg viewBox="0 0 48 48" width="36" height="36">
         <circle cx="24" cy="24" r="21" fill="#D6F146"/>
         <path
