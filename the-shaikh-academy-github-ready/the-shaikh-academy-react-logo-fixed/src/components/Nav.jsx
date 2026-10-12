@@ -67,9 +67,10 @@ export default function Nav() {
         {open && (
           <motion.div
             className="mobileNav"
-            initial={{ opacity: 0, y: -20 }}
+            initial={{ opacity: 0, y: -15 }}
             animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -20 }}
+            exit={{ opacity: 0, y: -15 }}
+            transition={{duration:.35,ease:[.22,1,.36,1]}}
           >
             {links.map((link, i) => (
               <motion.div
