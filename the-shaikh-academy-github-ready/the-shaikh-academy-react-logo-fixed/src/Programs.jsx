@@ -1,5 +1,5 @@
 
-import { useState } from 'react';
+import { useState , useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ArrowUpRight, ArrowLeft, Plus, Minus } from 'lucide-react';
 import { Link } from 'react-router-dom';
@@ -150,6 +150,8 @@ const fade = {
 
 export default function Programs() {
   const [activeStage, setActiveStage] = useState(0);
+  useEffect(()=>{if(window.location.hash==='#six-stages'){const frame=requestAnimationFrame(()=>{document.getElementById('six-stages')?.scrollIntoView({behavior:'instant',block:'start'});});return()=>cancelAnimationFrame(frame);}},[]);
+
 
   return (
     <main className="programsPage">
