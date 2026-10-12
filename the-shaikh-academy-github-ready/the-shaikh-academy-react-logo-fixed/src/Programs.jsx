@@ -233,7 +233,7 @@ export default function Programs() {
         </motion.div>
       </section>
 
-      <section className="methodSection">
+      <section id="six-stages" className="methodSection">
         <div className="methodHeading">
           <span className="programsEyebrow">THE SHAIKH PLAYER DEVELOPMENT METHOD</span>
           <h2>SIX STAGES.<br/><em>ONE PURPOSE.</em></h2>
