@@ -3,9 +3,27 @@ import { useState } from 'react';
 import { Menu, X, ArrowUpRight } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Link } from 'react-router-dom';
+import { useEffect } from 'react';
+import { useLocation } from 'react-router-dom';
 
 export default function Nav() {
   const [open, setOpen] = useState(false);
+  
+const location = useLocation();
+
+useEffect(() => {
+  if (!location.hash) return;
+
+  const scrollToSection = () => {
+    const section = document.getElementById(location.hash.slice(1));
+    if (section) {
+      section.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  };
+
+  const frame = requestAnimationFrame(scrollToSection);
+  return () => cancelAnimationFrame(frame);
+}, [location.pathname, location.hash]);
 
   const links = [
     { label: 'Legacy', href: '/#legacy' },
