@@ -8,12 +8,12 @@ export default function Nav() {
   const [open, setOpen] = useState(false);
 
   const links = [
-    { label: 'Legacy', href: '#legacy' },
-    { label: 'Coaches', href: '#coaches' },
+    { label: 'Legacy', href: '/#legacy' },
+    { label: 'Coaches', href: '/#coaches' },
     { label: 'Programs', href: '/programs' },
-    { label: 'Philosophy', href: '#philosophy' },
-    { label: 'Contact', href: '#contact' }
-  ];
+    { label: 'Philosophy', href: '/#philosophy' },
+    { label: 'Contact', href: '/#contact' }
+   ];
 
   return (
     <>
