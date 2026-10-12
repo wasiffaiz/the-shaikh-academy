@@ -98,7 +98,7 @@ useEffect(() => {
                 transition={{ delay: i * 0.06 }}
               >
                 {link.href.startsWith('/') ? (
-                  <Link to={link.href} onClick={() => setOpen(false)}>
+                   <Link to={link.href} onClick={() => {setOpen(false);if(link.href.includes('#')&&window.location.pathname==='/'&&window.location.hash===link.href.slice(1)){document.getElementById(link.href.split('#')[1])?.scrollIntoView({behavior:'smooth',block:'start'});}}}>
                     {link.label}
                   </Link>
                 ) : (
