@@ -62,4 +62,34 @@
   .courtLabIntro h2 {
     letter-spacing: 2px;
   }
+  
+/* COURT LAB — DESKTOP SIZE FIX */
+
+@media (min-width: 769px) {
+  .courtLabWorkspace {
+    max-width: 1050px;
+    margin: 45px auto 0;
+    grid-template-columns: minmax(0, 440px) minmax(0, 1fr);
+    gap: 65px;
+    align-items: center;
+  }
+
+  .courtLabCourt {
+    width: 100%;
+    max-width: 440px;
+    padding: 12px;
+    margin: 0 auto;
+  }
+
+  .courtLabCourt svg {
+    display: block;
+    width: 100%;
+    height: auto;
+    max-height: 440px;
+  }
+
+  .courtLab {
+    padding-top: 80px;
+  }
 }
+
