@@ -63,33 +63,55 @@
     letter-spacing: 2px;
   }
   
-/* COURT LAB — DESKTOP SIZE FIX */
+
+/* COURT LAB — COMPACT DESKTOP COURT */
 
 @media (min-width: 769px) {
+  .courtLab {
+    padding: 35px 5% 60px;
+  }
+
   .courtLabWorkspace {
     max-width: 1050px;
-    margin: 45px auto 0;
-    grid-template-columns: minmax(0, 440px) minmax(0, 1fr);
+    margin: 30px auto 0;
+    grid-template-columns: 380px minmax(0, 1fr);
     gap: 65px;
     align-items: center;
   }
 
   .courtLabCourt {
-    width: 100%;
-    max-width: 440px;
-    padding: 12px;
-    margin: 0 auto;
+    width: 380px;
+    max-width: 100%;
+    padding: 10px;
+    margin: 0;
+    overflow: hidden;
   }
 
   .courtLabCourt svg {
     display: block;
     width: 100%;
-    height: auto;
-    max-height: 440px;
+    height: 390px;
+    max-height: 390px;
+    object-fit: contain;
   }
 
-  .courtLab {
-    padding-top: 80px;
+  .courtLabIntro > span {
+    margin-bottom: 12px;
+  }
+
+  .courtLabIntro h1 {
+    font-size: 64px;
+    letter-spacing: -2px;
+  }
+
+  .courtLabIntro h2 {
+    margin-top: 15px;
+    font-size: 15px;
+  }
+
+  .courtLabIntro p {
+    margin-top: 8px;
   }
 }
+
 
