@@ -1,0 +1,65 @@
+
+.courtLab {
+  min-height: 100vh;
+  background: #101a28;
+  color: #f4f2ed;
+  padding: 130px 6% 90px;
+  font-family: 'DM Sans', sans-serif;
+}
+
+.courtLabIntro {
+  max-width: 1100px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.courtLabIntro > span {
+  display: block;
+  color: #e3b18e;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 3px;
+  margin-bottom: 28px;
+}
+
+.courtLabIntro h1 {
+  font-size: clamp(52px, 9vw, 125px);
+  font-weight: 500;
+  line-height: 1;
+  letter-spacing: -5px;
+  margin: 0;
+}
+
+.courtLabIntro h1 em {
+  color: #e3b18e;
+  font-family: 'Playfair Display', serif;
+  font-weight: 400;
+}
+
+.courtLabIntro h2 {
+  font-size: clamp(15px, 2vw, 22px);
+  font-weight: 500;
+  letter-spacing: 5px;
+  margin-top: 35px;
+}
+
+.courtLabIntro p {
+  color: #aeb9c6;
+  font-size: 12px;
+  letter-spacing: 2px;
+  margin-top: 16px;
+}
+
+@media (max-width: 768px) {
+  .courtLab {
+    padding: 110px 20px 70px;
+  }
+
+  .courtLabIntro h1 {
+    letter-spacing: -2px;
+  }
+
+  .courtLabIntro h2 {
+    letter-spacing: 2px;
+  }
+}
