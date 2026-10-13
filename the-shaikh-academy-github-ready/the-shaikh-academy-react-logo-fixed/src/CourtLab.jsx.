@@ -1,0 +1,16 @@
+
+import React from 'react';
+import './court-lab.css';
+
+export default function CourtLab() {
+  return (
+    <main className="courtLab">
+      <div className="courtLabIntro">
+        <span>THE SHAIKH ACADEMY / INTERACTIVE EXPERIENCE</span>
+        <h1>THE COURT <em>LAB.</em></h1>
+        <h2>TACTICAL INTELLIGENCE.</h2>
+        <p>READ THE GAME. ANTICIPATE THE SHOT. WIN THE POINT.</p>
+      </div>
+    </main>
+  );
+}
