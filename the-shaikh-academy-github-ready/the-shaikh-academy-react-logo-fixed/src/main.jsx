@@ -8,6 +8,7 @@ import Book from './Book';
 import CoachProfile from './CoachProfile';
 import TennisCursor from './components/TennisCursor';
 import CourtLab from './CourtLab';
+import Learn from './Learn';
 import './styles.css';
 
 ReactDOM.createRoot(document.getElementById('root')).render(
@@ -19,6 +20,7 @@ ReactDOM.createRoot(document.getElementById('root')).render(
         <Route path="/programs" element={<Programs/>}/>
         <Route path="/book" element={<Book/>}/>
         <Route path="/court-lab" element={<CourtLab/>}/>
+        <Route path="/learn" element={<Learn />} />
         <Route path="/coaches/:id" element={<CoachProfile/>}/>
       </Routes>
     </BrowserRouter>
