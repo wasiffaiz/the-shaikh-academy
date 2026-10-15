@@ -1,7 +1,5 @@
 
-/* ========================================
-   THE SHAIKH ACADEMY — COURT LAB
-======================================== */
+/* THE SHAIKH ACADEMY — COURT LAB */
 
 .courtLab {
   min-height: 100vh;
@@ -17,12 +15,16 @@
   text-align: center;
 }
 
-.courtLabIntro > span {
+.courtLabIntro > span,
+.courtLabEyebrow {
   display: block;
   color: #e3b18e;
   font-size: 11px;
   font-weight: 600;
   letter-spacing: 3px;
+}
+
+.courtLabIntro > span {
   margin-bottom: 28px;
 }
 
@@ -54,10 +56,6 @@
   margin-top: 16px;
 }
 
-/* ========================================
-   COURT AND CONTROLS
-======================================== */
-
 .courtLabWorkspace {
   max-width: 1050px;
   margin: 80px auto 0;
@@ -84,12 +82,6 @@
   text-align: left;
 }
 
-.courtLabEyebrow {
-  color: #e3b18e;
-  font-size: 11px;
-  letter-spacing: 3px;
-}
-
 .courtLabControls h3 {
   font-size: clamp(28px, 3vw, 42px);
   font-weight: 500;
@@ -104,17 +96,14 @@
   margin-bottom: 35px;
 }
 
-/* ========================================
-   SHOT SELECTION
-======================================== */
-
 .courtLabShotButtons {
   display: flex;
   flex-direction: column;
   gap: 12px;
 }
 
-.courtLabShotButtons button {
+.courtLabShotButtons button,
+.courtLabAnswers button {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -158,31 +147,8 @@
   letter-spacing: 1px;
 }
 
-/* ========================================
-   ANIMATION
-======================================== */
-
-.courtLabShotPath {
-  animation: courtLabDraw 1s ease forwards;
-}
-
-@keyframes courtLabDraw {
-  from {
-    stroke-dashoffset: 140;
-    opacity: .3;
-  }
-
-  to {
-    stroke-dashoffset: 0;
-    opacity: 1;
-  }
-}
-
-/* ========================================
-   REPLAY BUTTON
-======================================== */
-
-.courtLabReplay {
+.courtLabReplay,
+.courtLabNext {
   margin-top: 25px;
   padding: 15px 25px;
   width: 100%;
@@ -197,19 +163,228 @@
   transition: background .3s, color .3s;
 }
 
-.courtLabReplay:hover {
+.courtLabReplay:hover,
+.courtLabNext:hover {
   background: #e3b18e;
   color: #101a28;
 }
 
-.courtLabReplay:focus-visible {
+.courtLabTactics {
+  margin-top: 40px;
+  padding-top: 30px;
+  border-top: 1px solid #405064;
+}
+
+.courtLabTactics h3 {
+  font-size: 24px;
+  margin: 18px 0 25px;
+}
+
+.courtLabTacticCard {
+  background: #1b2b3d;
+  border-left: 2px solid #e3b18e;
+  padding: 20px;
+  margin-bottom: 14px;
+}
+
+.courtLabTacticCard span {
+  display: block;
+  color: #e3b18e;
+  font-size: 10px;
+  letter-spacing: 1.5px;
+}
+
+.courtLabTacticCard p {
+  color: #f4f2ed;
+  font-size: 13px;
+  line-height: 1.8;
+  margin: 12px 0 0;
+}
+
+.courtLabChoiceGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+
+.courtLabChoiceGrid button,
+.courtLabLevelButtons button {
+  padding: 15px 12px;
+  border: 1px solid #405064;
+  background: transparent;
+  color: #f4f2ed;
+  font-family: inherit;
+  font-size: 11px;
+  letter-spacing: 1px;
+  cursor: pointer;
+}
+
+.courtLabChoiceGrid button.active,
+.courtLabLevelButtons button.active {
+  background: #e3b18e;
+  border-color: #e3b18e;
+  color: #101a28;
+}
+
+.courtLabInfo {
+  color: #b7c2cd;
+  font-size: 13px;
+  line-height: 1.8;
+  margin-top: 20px;
+}
+
+.courtLabDisclaimer {
+  color: #8e9baa;
+  font-size: 11px;
+  line-height: 1.7;
+  margin-top: 15px;
+}
+
+.courtLabChallenge,
+.courtLabLevels {
+  max-width: 1050px;
+  margin: 100px auto 0;
+}
+
+.courtLabChallenge > h2,
+.courtLabLevels > h2 {
+  font-size: clamp(30px, 5vw, 60px);
+  font-weight: 500;
+  letter-spacing: -2px;
+  margin: 20px 0;
+}
+
+.courtLabChallengeIntro {
+  color: #aeb9c6;
+  font-size: 14px;
+  line-height: 1.8;
+}
+
+.courtLabChallengePanel {
+  background: #172638;
+  border: 1px solid #405064;
+  padding: 35px;
+  margin-top: 35px;
+}
+
+.courtLabChallengeTop {
+  display: flex;
+  justify-content: space-between;
+  gap: 15px;
+  color: #e3b18e;
+  font-size: 11px;
+  letter-spacing: 2px;
+}
+
+.courtLabChallengePanel h3 {
+  font-size: clamp(24px, 3vw, 36px);
+  font-weight: 500;
+  margin: 30px 0 15px;
+}
+
+.courtLabChallengePanel > p {
+  color: #b7c2cd;
+  font-size: 14px;
+  line-height: 1.8;
+}
+
+.courtLabQuestion {
+  display: block;
+  font-size: 16px;
+  font-weight: 500;
+  margin: 25px 0;
+}
+
+.courtLabAnswers {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.courtLabAnswers button {
+  width: 100%;
+  text-align: left;
+}
+
+.courtLabAnswers button:disabled {
+  cursor: default;
+}
+
+.courtLabAnswers button.correct {
+  border-color: #81c7a0;
+  background: #24463e;
+}
+
+.courtLabAnswers button.incorrect {
+  border-color: #e3b18e;
+  background: #48382f;
+}
+
+.courtLabFeedback {
+  background: #203349;
+  padding: 25px;
+  margin-top: 25px;
+  border-left: 2px solid #e3b18e;
+}
+
+.courtLabFeedback span {
+  color: #e3b18e;
+  font-size: 11px;
+  letter-spacing: 2px;
+}
+
+.courtLabFeedback p {
+  color: #f4f2ed;
+  font-size: 13px;
+  line-height: 1.8;
+}
+
+.courtLabReset {
+  display: block;
+  margin-top: 20px;
+  padding: 12px 0;
+  background: transparent;
+  border: none;
+  color: #aeb9c6;
+  font-size: 11px;
+  letter-spacing: 2px;
+  cursor: pointer;
+}
+
+.courtLabLevelButtons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 30px;
+}
+
+.courtLabFooter {
+  max-width: 1050px;
+  margin: 100px auto 0;
+  padding-top: 35px;
+  border-top: 1px solid #405064;
+}
+
+.courtLabFooter span {
+  color: #e3b18e;
+  font-size: 11px;
+  letter-spacing: 3px;
+}
+
+.courtLabFooter p {
+  color: #aeb9c6;
+  font-size: 11px;
+  letter-spacing: 1.5px;
+  line-height: 1.8;
+  margin-top: 15px;
+}
+
+.courtLab button:focus-visible {
   outline: 2px solid #f4f2ed;
   outline-offset: 3px;
 }
 
-/* ========================================
-   DESKTOP — KEEP EXISTING COURT SIZE
-======================================== */
+/* DESKTOP — PRESERVE EXISTING COURT SIZE */
 
 @media (min-width: 769px) {
   .courtLab {
@@ -233,7 +408,6 @@
   }
 
   .courtLabCourt svg {
-    display: block;
     width: 100%;
     height: 390px;
     max-height: 390px;
@@ -259,9 +433,7 @@
   }
 }
 
-/* ========================================
-   MOBILE
-======================================== */
+/* MOBILE */
 
 @media (max-width: 768px) {
   .courtLab {
@@ -296,14 +468,25 @@
   .courtLabShotButtons button {
     padding: 17px;
   }
-}
 
-@media (prefers-reduced-motion: reduce) {
-  .courtLabShotPath {
-    animation: none;
+  .courtLabChallenge,
+  .courtLabLevels {
+    margin-top: 70px;
+  }
+
+  .courtLabChallengePanel {
+    padding: 20px;
+  }
+
+  .courtLabChallengeTop {
+    font-size: 10px;
+    letter-spacing: 1px;
   }
 }
 
-
-
-
+@media (prefers-reduced-motion: reduce) {
+  .courtLab svg animate,
+  .courtLab svg animateMotion {
+    display: none;
+  }
+}
