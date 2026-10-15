@@ -1,4 +1,8 @@
 
+/* ========================================
+   THE SHAIKH ACADEMY — COURT LAB
+======================================== */
+
 .courtLab {
   min-height: 100vh;
   background: #101a28;
@@ -50,21 +54,162 @@
   margin-top: 16px;
 }
 
-@media (max-width: 768px) {
-  .courtLab {
-    padding: 110px 20px 70px;
+/* ========================================
+   COURT AND CONTROLS
+======================================== */
+
+.courtLabWorkspace {
+  max-width: 1050px;
+  margin: 80px auto 0;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+  gap: 80px;
+}
+
+.courtLabCourt {
+  background: #24443e;
+  border: 1px solid #45665d;
+  border-radius: 8px;
+  padding: 25px;
+}
+
+.courtLabCourt svg {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.courtLabControls {
+  text-align: left;
+}
+
+.courtLabEyebrow {
+  color: #e3b18e;
+  font-size: 11px;
+  letter-spacing: 3px;
+}
+
+.courtLabControls h3 {
+  font-size: clamp(28px, 3vw, 42px);
+  font-weight: 500;
+  letter-spacing: -1px;
+  margin: 20px 0;
+}
+
+.courtLabControls > p {
+  color: #aeb9c6;
+  line-height: 1.8;
+  font-size: 14px;
+  margin-bottom: 35px;
+}
+
+/* ========================================
+   SHOT SELECTION
+======================================== */
+
+.courtLabShotButtons {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.courtLabShotButtons button {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 22px;
+  background: transparent;
+  border: 1px solid #405064;
+  color: #f4f2ed;
+  font-family: inherit;
+  font-size: 12px;
+  letter-spacing: 1.5px;
+  cursor: pointer;
+  transition: background .3s, color .3s, border-color .3s;
+}
+
+.courtLabShotButtons button:hover,
+.courtLabShotButtons button.active {
+  background: #e3b18e;
+  border-color: #e3b18e;
+  color: #101a28;
+}
+
+.courtLabSelection {
+  margin-top: 35px;
+  padding-top: 22px;
+  border-top: 1px solid #405064;
+  display: flex;
+  justify-content: space-between;
+  gap: 15px;
+  align-items: center;
+}
+
+.courtLabSelection span {
+  color: #aeb9c6;
+  font-size: 10px;
+  letter-spacing: 2px;
+}
+
+.courtLabSelection strong {
+  color: #e3b18e;
+  font-size: 12px;
+  letter-spacing: 1px;
+}
+
+/* ========================================
+   ANIMATION
+======================================== */
+
+.courtLabShotPath {
+  animation: courtLabDraw 1s ease forwards;
+}
+
+@keyframes courtLabDraw {
+  from {
+    stroke-dashoffset: 140;
+    opacity: .3;
   }
 
-  .courtLabIntro h1 {
-    letter-spacing: -2px;
+  to {
+    stroke-dashoffset: 0;
+    opacity: 1;
   }
+}
 
-  .courtLabIntro h2 {
-    letter-spacing: 2px;
-  }
-  
+/* ========================================
+   REPLAY BUTTON
+======================================== */
 
-/* COURT LAB — COMPACT DESKTOP COURT */
+.courtLabReplay {
+  margin-top: 25px;
+  padding: 15px 25px;
+  width: 100%;
+  background: transparent;
+  border: 1px solid #e3b18e;
+  color: #e3b18e;
+  font-family: inherit;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 2px;
+  cursor: pointer;
+  transition: background .3s, color .3s;
+}
+
+.courtLabReplay:hover {
+  background: #e3b18e;
+  color: #101a28;
+}
+
+.courtLabReplay:focus-visible {
+  outline: 2px solid #f4f2ed;
+  outline-offset: 3px;
+}
+
+/* ========================================
+   DESKTOP — KEEP EXISTING COURT SIZE
+======================================== */
 
 @media (min-width: 769px) {
   .courtLab {
@@ -112,35 +257,53 @@
   .courtLabIntro p {
     margin-top: 8px;
   }
-  
+}
+
 /* ========================================
-   COURT LAB — ANIMATED SHOT CONTROLS
+   MOBILE
 ======================================== */
 
-  .courtLabReplay {
-  margin-top: 25px;
-  padding: 15px 25px;
-  width: 100%;
-  background: transparent;
-  border: 1px solid #e3b18e;
-  color: #e3b18e;
-  font-family: inherit;
-  font-size: 11px;
-  font-weight: 600;
-  letter-spacing: 2px;
-  cursor: pointer;
-  transition: background .3s, color .3s;
- }
+@media (max-width: 768px) {
+  .courtLab {
+    padding: 110px 20px 70px;
+  }
 
- .courtLabReplay:hover {
-  background: #e3b18e;
-  color: #101a28;
- }
+  .courtLabIntro h1 {
+    letter-spacing: -2px;
+  }
 
- .courtLabReplay:focus-visible {
-  outline: 2px solid #f4f2ed;
-  outline-offset: 3px;
- }
+  .courtLabIntro h2 {
+    letter-spacing: 2px;
+  }
+
+  .courtLabWorkspace {
+    grid-template-columns: 1fr;
+    gap: 40px;
+    margin-top: 50px;
+  }
+
+  .courtLabCourt {
+    padding: 12px;
+    max-width: 460px;
+    width: 100%;
+    margin: 0 auto;
+  }
+
+  .courtLabControls h3 {
+    font-size: 30px;
+  }
+
+  .courtLabShotButtons button {
+    padding: 17px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .courtLabShotPath {
+    animation: none;
+  }
+}
+
 
 
 
