@@ -663,7 +663,7 @@ export default function CourtLab() {
           <span aria-hidden="true">←</span>
           BACK TO HOME
         </Link>
-        <div className="tacticsEyebrow">THE SHAIKH ACADEMY <span>/</span> TENNIS EDUCATION</div>
+        <div className="tacticsEyebrow"><img src="/assets/legacy-logo.png" alt="Logo" style={{width:30,height:30,objectFit:'contain',verticalAlign:'middle',marginRight:12}} />THE SHAIKH ACADEMY <span>/</span> TENNIS EDUCATION</div>
         <h1>TACTICAL<br /><em>INTELLIGENCE.</em></h1>
         <p className="tacticsTagline">PLAY SMARTER. WIN MORE.</p>
         <p className="tacticsLead">A practical collection of singles and doubles match patterns, positioning principles and decisions — built from our Tennis Tactics Playbook.</p>
