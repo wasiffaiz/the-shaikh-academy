@@ -960,6 +960,10 @@ export default function PerformanceLab() {
   return (
     <main className="performancePage">
       <section className="performanceHero">
+        <Link to="/" className="academyBackHome">
+          <span aria-hidden="true">←</span>
+          BACK TO HOME
+        </Link>
         <p className="performanceEyebrow">THE SHAIKH ACADEMY <span>/</span> PLAYER DEVELOPMENT</p>
         <h1>THE PERFORMANCE<br /><em>LAB.</em></h1>
         <p className="performanceTagline">BUILD THE ATHLETE. ELEVATE THE PLAYER.</p>
