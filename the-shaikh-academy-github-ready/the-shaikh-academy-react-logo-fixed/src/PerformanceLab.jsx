@@ -1,5 +1,6 @@
 import { useEffect, useMemo, useState } from 'react';
 import { Search, X, ArrowUpRight, ArrowLeft, ArrowRight, Bookmark, Dumbbell, MapPin } from 'lucide-react';
+import { Link } from 'react-router-dom';
 import './performance-lab.css';
 
 const CATEGORIES = [
