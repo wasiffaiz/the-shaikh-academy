@@ -33,6 +33,7 @@ export default function Nav() {
     { label: 'Coaches', href: '/#coaches' },
     { label: 'Programs', href: '/programs' },
     { label: 'Tactics', href: '/court-lab' },
+    { label: 'Exercises', href: '/exercises' },
     { label: 'Philosophy', href: '/#philosophy' },
     { label: 'Contact', href: '/#contact' }
   ];
