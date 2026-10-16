@@ -1,4 +1,5 @@
 import React, { useMemo, useState } from 'react';
+import { Link } from 'react-router-dom';
 import './court-lab.css';
 
 // Tactic descriptions are from the Tennis Singles and Doubles Tactics Playbook.
@@ -658,6 +659,10 @@ export default function CourtLab() {
   return (
     <main className="tacticsPage">
       <section className="tacticsHero">
+        <Link to="/" className="academyBackHome">
+          <span aria-hidden="true">←</span>
+          BACK TO HOME
+        </Link>
         <div className="tacticsEyebrow">THE SHAIKH ACADEMY <span>/</span> TENNIS EDUCATION</div>
         <h1>TACTICAL<br /><em>INTELLIGENCE.</em></h1>
         <p className="tacticsTagline">PLAY SMARTER. WIN MORE.</p>
