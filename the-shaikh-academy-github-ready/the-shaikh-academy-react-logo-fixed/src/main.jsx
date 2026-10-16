@@ -10,6 +10,7 @@ import TennisCursor from './components/TennisCursor';
 import CourtLab from './CourtLab';
 import Learn from './Learn';
 import PerformanceLab from './PerformanceLab.jsx';
+import GrandSlams from './GrandSlams.jsx';
 import './styles.css';
 
 ReactDOM.createRoot(document.getElementById('root')).render(
@@ -23,6 +24,7 @@ ReactDOM.createRoot(document.getElementById('root')).render(
         <Route path="/court-lab" element={<CourtLab/>}/>
         <Route path="/learn" element={<Learn />} />
         <Route path="/exercises" element={<PerformanceLab />} />
+        <Route path="/grand-slams" element={<GrandSlams />} />
         <Route path="/coaches/:id" element={<CoachProfile/>}/>
       </Routes>
     </BrowserRouter>
