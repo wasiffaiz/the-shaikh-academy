@@ -7,3 +7,25 @@
 .tacticsOverlay{position:fixed;inset:0;background:rgba(8,13,20,.8);z-index:99999;display:flex;justify-content:center;align-items:center;padding:20px;overflow-y:auto}.tacticsModal{width:min(100%,920px);max-height:min(90vh,920px);overflow:auto;background:#f4f2ed;color:#101a28;box-shadow:0 20px 90px #0006}.tacticsModalHeader{display:flex;justify-content:space-between;align-items:center;padding:22px 30px;border-bottom:1px solid #d6d1c9;color:#8d795f}.tacticsModalHeader button{border:0;background:none;font-size:22px;color:#101a28}.tacticsModalContent{padding:36px 30px;display:grid;grid-template-columns:1fr 290px;gap:38px}.tacticsModalText h2{font-family:'Playfair Display',Georgia,serif;font-weight:400;font-size:clamp(30px,4vw,47px);line-height:1.1;margin:15px 0 30px}.tacticsModalText h3{font-size:11px;letter-spacing:2px;margin:26px 0 10px}.tacticsModalText p{line-height:1.85;color:#4e575d;font-size:15px}.tacticsModalSave{border:1px solid #101a28;background:transparent;color:#101a28;font-size:11px;letter-spacing:1.4px;padding:14px 18px;margin-top:18px}.tacticsDiagramWrap{background:#101a28;padding:18px;align-self:start}.tacticsSketch{display:block;width:100%;max-height:350px}.tacticsDiagramWrap p{font-size:10px;line-height:1.6;color:#aebbc4;margin:12px 0 0}.tacticsModalNav{border-top:1px solid #d6d1c9;padding:20px 30px;display:flex;justify-content:space-between;gap:20px}.tacticsModalNav button{background:none;border:0;color:#101a28;font-size:11px;letter-spacing:1.5px;font-weight:700}
 @media(max-width:900px){.tacticsGrid{grid-template-columns:repeat(2,minmax(0,1fr))}.tacticsChecklist{grid-template-columns:1fr;gap:15px}}@media(max-width:620px){.tacticsHero{padding:125px 22px 60px}.tacticsHero h1{font-size:clamp(42px,11vw,65px)}.tacticsLead{font-size:14px}.tacticsMetrics{gap:20px}.tacticsMetrics strong{font-size:24px}.tacticsBody{padding:55px 20px 70px}.tacticsTopline span:last-child{display:none}.tacticsFormatTabs{gap:8px}.tacticsFormatTabs button{flex:1;padding:14px 10px;font-size:10px}.tacticsTools{grid-template-columns:1fr}.tacticsGrid{grid-template-columns:1fr}.tacticsCard{min-height:280px}.tacticsChecklist{padding:60px 22px}.tacticsFooter{padding:25px 22px;flex-direction:column;font-size:9px}.tacticsModalContent{grid-template-columns:1fr;padding:24px 20px}.tacticsDiagramWrap{max-width:330px;width:100%;margin:auto}.tacticsModalHeader,.tacticsModalNav{padding:18px 20px}.tacticsOverlay{padding:10px}.tacticsModal{max-height:94vh}}
 @media(prefers-reduced-motion:reduce){.tacticsCard{transition:none}}
+
+/* Accurate tactical sketches and visible pointer within the dialog. */
+.tacticsOverlay,.tacticsOverlay *{cursor:auto!important}
+.tacticsOverlay button,.tacticsOverlay a{cursor:pointer!important}
+.tacticsOverlay{isolation:isolate}
+.tacticsDiagramWrap{min-width:0}
+.tacticsDiagram p{color:#d3d9dc;font-size:12px;line-height:1.65;margin:12px 0}
+.tacticsDiagram small{color:#aebbc4;font-size:10px;line-height:1.5;display:block;margin-top:12px}
+.tacticsLegend{display:flex;flex-wrap:wrap;gap:13px;margin-top:12px;font-size:10px;color:#e5e9e9}
+.tacticsLegend span{display:inline-flex;align-items:center;gap:6px}
+.tacticsLegend i{display:inline-block;flex-shrink:0}
+.tacticsDotUs,.tacticsDotThem{width:10px;height:10px;border-radius:50%}
+.tacticsDotUs{background:#dceba3}.tacticsDotThem{background:#e8a991}
+.tacticsLineShot,.tacticsLineMove{width:20px;border-top:2px dashed #f2bd96}.tacticsLineMove{border-color:#a9dce5}
+.tacticsDiagramNote{padding:25px 12px;color:#f4f2ed}
+.tacticsDiagramNote>span{font-size:10px;letter-spacing:2px;color:#e3b18e}
+.tacticsDiagramNote h3{font-family:'Playfair Display',Georgia,serif;font-size:26px;font-weight:400;margin:20px 0}
+.tacticsDiagramNote p{font-size:13px;line-height:1.8;color:#d0d7dc}
+/* Override any global hidden-cursor rule inside the tactic dialog. */
+body:has(.tacticsOverlay){cursor:auto!important}
+body:has(.tacticsOverlay) .tacticsOverlay{cursor:auto!important}
+
