@@ -1,0 +1,289 @@
+
+/* THE SHAIKH ACADEMY — PERFORMANCE LAB */
+
+.performancePage {
+  --navy: #101a28;
+  --clay: #e3b18e;
+  --cream: #f4f2ed;
+  background: var(--cream);
+  color: var(--navy);
+  min-height: 100vh;
+  font-family: 'DM Sans', Arial, sans-serif;
+}
+
+.performancePage * {
+  box-sizing: border-box;
+}
+
+.performanceHero {
+  background: var(--navy);
+  color: var(--cream);
+  padding: 160px max(6%, calc((100vw - 1200px)/2)) 85px;
+}
+
+.performanceEyebrow,
+.performanceTagline,
+.performanceTopline,
+.performanceCardTop,
+.performanceCardBottom,
+.performanceStatement > p,
+.performanceFooter {
+  font-size: 11px;
+  letter-spacing: 2px;
+  font-weight: 700;
+}
+
+.performanceEyebrow,
+.performanceTagline {
+  color: var(--clay);
+}
+
+.performanceEyebrow span {
+  padding: 0 10px;
+  color: #8a9aaa;
+}
+
+.performanceHero h1,
+.performanceIntro h2,
+.performanceStatement h2 {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-weight: 400;
+  letter-spacing: -2px;
+  line-height: 1.08;
+}
+
+.performanceHero h1 {
+  font-size: clamp(48px, 7vw, 104px);
+  margin: 25px 0;
+}
+
+.performanceHero h1 em,
+.performanceIntro h2 em,
+.performanceStatement h2 em {
+  color: var(--clay);
+  font-weight: 400;
+}
+
+.performanceTagline {
+  letter-spacing: 3px;
+}
+
+.performanceLead {
+  max-width: 620px;
+  color: #bdc4ca;
+  font-size: 16px;
+  line-height: 1.8;
+  margin: 26px 0 45px;
+}
+
+.performanceMetrics {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 40px;
+  border-top: 1px solid #394251;
+  padding-top: 24px;
+}
+
+.performanceMetrics span {
+  display: flex;
+  align-items: baseline;
+  gap: 12px;
+  color: #b6c1c9;
+  font-size: 10px;
+  letter-spacing: 1.5px;
+}
+
+.performanceMetrics strong {
+  font-size: 32px;
+  color: var(--cream);
+  font-weight: 500;
+}
+
+.performanceBody {
+  max-width: 1320px;
+  margin: auto;
+  padding: 85px 6% 110px;
+}
+
+.performanceTopline {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  color: #7a7773;
+  border-bottom: 1px solid #c9c9c5;
+  padding-bottom: 16px;
+}
+
+.performanceIntro {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 50px;
+  align-items: end;
+  margin: 60px 0 50px;
+}
+
+.performanceIntro h2 {
+  font-size: clamp(40px, 5vw, 70px);
+  margin: 0;
+}
+
+.performanceIntro p {
+  max-width: 450px;
+  font-size: 15px;
+  line-height: 1.9;
+  color: #5c6165;
+}
+
+.performanceGrid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 18px;
+}
+
+.performanceCard {
+  background: #fff;
+  border: 1px solid #e3dfd7;
+  padding: 28px;
+  min-height: 305px;
+  display: flex;
+  flex-direction: column;
+  transition: transform .2s, border-color .2s;
+}
+
+.performanceCard:hover {
+  transform: translateY(-3px);
+  border-color: #c49b7d;
+}
+
+.performanceCardTop {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  color: #aa7a58;
+  font-size: 10px;
+}
+
+.performanceCard h3 {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: 29px;
+  font-weight: 400;
+  line-height: 1.2;
+  margin: 40px 0 16px;
+}
+
+.performanceCard p {
+  color: #5c6165;
+  font-size: 13px;
+  line-height: 1.8;
+}
+
+.performanceCardBottom {
+  margin-top: auto;
+  padding-top: 20px;
+  border-top: 1px solid #e6e2dc;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: #8c8d8d;
+  font-size: 10px;
+}
+
+.performanceCardBottom span {
+  font-size: 20px;
+}
+
+.performanceStatement {
+  background: #182638;
+  color: var(--cream);
+  text-align: center;
+  padding: 100px 6%;
+}
+
+.performanceStatement > p {
+  color: var(--clay);
+}
+
+.performanceStatement h2 {
+  font-size: clamp(40px, 6vw, 80px);
+  margin: 25px 0;
+}
+
+.performanceStatement > span {
+  color: #c5cbd0;
+  font-size: 14px;
+}
+
+.performanceFooter {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+  background: var(--navy);
+  color: var(--clay);
+  padding: 28px 6%;
+}
+
+.performanceFooter span {
+  color: #c8c7c2;
+}
+
+@media (max-width: 900px) {
+  .performanceGrid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 620px) {
+  .performanceHero {
+    padding: 125px 22px 60px;
+  }
+
+  .performanceHero h1 {
+    font-size: clamp(42px, 11vw, 65px);
+  }
+
+  .performanceLead {
+    font-size: 14px;
+  }
+
+  .performanceMetrics {
+    gap: 20px;
+  }
+
+  .performanceMetrics strong {
+    font-size: 24px;
+  }
+
+  .performanceBody {
+    padding: 55px 20px 70px;
+  }
+
+  .performanceIntro {
+    grid-template-columns: 1fr;
+    gap: 10px;
+    margin: 40px 0;
+  }
+
+  .performanceGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .performanceCard {
+    min-height: 260px;
+  }
+
+  .performanceStatement {
+    padding: 70px 22px;
+  }
+
+  .performanceFooter {
+    padding: 25px 22px;
+    flex-direction: column;
+    font-size: 9px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .performanceCard {
+    transition: none;
+  }
+}
