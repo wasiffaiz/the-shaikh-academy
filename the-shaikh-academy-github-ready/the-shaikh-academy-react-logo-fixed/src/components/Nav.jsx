@@ -1,37 +1,41 @@
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Menu, X, ArrowUpRight } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Link } from 'react-router-dom';
-import { useEffect } from 'react';
-import { useLocation } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 
 export default function Nav() {
   const [open, setOpen] = useState(false);
-  
-const location = useLocation();
+  const location = useLocation();
 
-useEffect(() => {
-  if (!location.hash) return;
+  useEffect(() => {
+    if (!location.hash) return;
 
-  const scrollToSection = () => {
-    const section = document.getElementById(location.hash.slice(1));
-    if (section) {
-      section.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    }
-  };
+    const scrollToSection = () => {
+      const section = document.getElementById(
+        location.hash.slice(1)
+      );
 
-  const frame = requestAnimationFrame(scrollToSection);
-  return () => cancelAnimationFrame(frame);
-}, [location.pathname, location.hash]);
+      if (section) {
+        section.scrollIntoView({
+          behavior: 'smooth',
+          block: 'start'
+        });
+      }
+    };
+
+    const frame = requestAnimationFrame(scrollToSection);
+    return () => cancelAnimationFrame(frame);
+  }, [location.pathname, location.hash]);
 
   const links = [
     { label: 'Legacy', href: '/#legacy' },
     { label: 'Coaches', href: '/#coaches' },
     { label: 'Programs', href: '/programs' },
+    { label: 'Tactics', href: '/court-lab' },
     { label: 'Philosophy', href: '/#philosophy' },
     { label: 'Contact', href: '/#contact' }
-   ];
+  ];
 
   return (
     <>
@@ -54,30 +58,25 @@ useEffect(() => {
         </Link>
 
         <nav>
-          {links.map(link =>
-            link.href.startsWith('/') ? (
-              <Link key={link.label} to={link.href}>
-                {link.label}
-              </Link>
-            ) : (
-              <a key={link.label} href={link.href}>
-                {link.label}
-              </a>
-            )
-          )}
+          {links.map(link => (
+            <Link key={link.label} to={link.href}>
+              {link.label}
+            </Link>
+          ))}
 
           <Link to="/book" className="navBookButton">
-            BOOK A SESSION <ArrowUpRight size={16}/>
+            BOOK A SESSION <ArrowUpRight size={16} />
           </Link>
         </nav>
 
         <button
+          type="button"
           className="menu"
           onClick={() => setOpen(!open)}
           aria-label={open ? 'Close menu' : 'Open menu'}
           aria-expanded={open}
         >
-          {open ? <X/> : <Menu/>}
+          {open ? <X /> : <Menu />}
         </button>
       </header>
 
@@ -88,7 +87,10 @@ useEffect(() => {
             initial={{ opacity: 0, y: -15 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -15 }}
-            transition={{duration:.35,ease:[.22,1,.36,1]}}
+            transition={{
+              duration: 0.35,
+              ease: [0.22, 1, 0.36, 1]
+            }}
           >
             {links.map((link, i) => (
               <motion.div
@@ -97,15 +99,27 @@ useEffect(() => {
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ delay: i * 0.06 }}
               >
-                {link.href.startsWith('/') ? (
-                   <Link to={link.href} onClick={() => {setOpen(false);if(link.href.includes('#')&&window.location.pathname==='/'&&window.location.hash===link.href.slice(1)){document.getElementById(link.href.split('#')[1])?.scrollIntoView({behavior:'smooth',block:'start'});}}}>
-                    {link.label}
-                  </Link>
-                ) : (
-                  <a href={link.href} onClick={() => setOpen(false)}>
-                    {link.label}
-                  </a>
-                )}
+                <Link
+                  to={link.href}
+                  onClick={() => {
+                    setOpen(false);
+
+                    if (
+                      link.href.includes('#') &&
+                      window.location.pathname === '/' &&
+                      window.location.hash === link.href.slice(1)
+                    ) {
+                      document
+                        .getElementById(link.href.split('#')[1])
+                        ?.scrollIntoView({
+                          behavior: 'smooth',
+                          block: 'start'
+                        });
+                    }
+                  }}
+                >
+                  {link.label}
+                </Link>
               </motion.div>
             ))}
 
@@ -114,7 +128,7 @@ useEffect(() => {
               className="mobileBookButton"
               onClick={() => setOpen(false)}
             >
-              BOOK A SESSION <ArrowUpRight size={17}/>
+              BOOK A SESSION <ArrowUpRight size={17} />
             </Link>
           </motion.div>
         )}
@@ -122,3 +136,4 @@ useEffect(() => {
     </>
   );
 }
+
