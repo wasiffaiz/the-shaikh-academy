@@ -697,7 +697,7 @@ export default function CourtLab() {
         <div><span className="tacticsEyebrow">BEFORE YOU COMPETE</span><h2>MATCH-DAY<br /><em>CHECKLIST.</em></h2></div>
         <ol>{CHECKLIST.map(item => <li key={item}>{item}</li>)}</ol>
       </section>
-      <footer className="tacticsFooter">THE SHAIKH ACADEMY <span>THREE COACHES. ONE LEGACY.</span></footer>
+      <footer className="tacticsFooter"><div style={{display:'flex',alignItems:'center',gap:'12px'}}><img src="/assets/legacy-logo.png" alt="The Shaikh Academy logo" style={{width:'38px',height:'38px',objectFit:'contain'}}/><span>THE SHAIKH ACADEMY</span></div><span>THREE COACHES. ONE LEGACY.</span></footer>
 
       {current && <div className="tacticsOverlay" role="presentation" onMouseDown={e => { if (e.target === e.currentTarget) closeTactic(); }}>
         <section className="tacticsModal" role="dialog" aria-modal="true" aria-labelledby="tacticsDialogTitle">
