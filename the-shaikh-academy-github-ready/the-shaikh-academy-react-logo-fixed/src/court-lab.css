@@ -173,4 +173,31 @@ body:has(.tacticsOverlay){cursor:auto!important}
   }
 }
 
+/* Logo beside academy name */
 
+.academyEyebrowLogo {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.academyEyebrowLogo img {
+  width: 32px;
+  height: 32px;
+  object-fit: contain;
+  flex-shrink: 0;
+}
+
+@media (max-width: 620px) {
+  .academyEyebrowLogo {
+    gap: 7px;
+    font-size: 9px;
+    letter-spacing: 1.3px;
+  }
+
+  .academyEyebrowLogo img {
+    width: 26px;
+    height: 26px;
+  }
+}
