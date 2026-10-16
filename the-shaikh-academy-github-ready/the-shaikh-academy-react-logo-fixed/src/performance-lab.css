@@ -12,3 +12,51 @@
 @media(max-width:360px){.performanceFilters{grid-template-columns:1fr}.performanceFilters .performanceSearch{grid-column:auto}}
 @media(prefers-reduced-motion:reduce){.performanceCategoryCard{transition:none}}
 
+/* THE SHAIKH ACADEMY — BACK TO HOME */
+
+.academyBackHome {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 45px;
+  padding-bottom: 12px;
+  color: #e3b18e;
+  text-decoration: none;
+  font-family: 'DM Sans', Arial, sans-serif;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  border-bottom: 1px solid rgba(227, 177, 142, 0.35);
+  transition: color .25s, gap .25s, border-color .25s;
+}
+
+.academyBackHome span {
+  font-size: 20px;
+  line-height: 1;
+}
+
+.academyBackHome:hover {
+  color: #f4f2ed;
+  gap: 18px;
+  border-color: #f4f2ed;
+}
+
+.academyBackHome:focus-visible {
+  outline: 2px solid #e3b18e;
+  outline-offset: 5px;
+}
+
+@media (max-width: 620px) {
+  .academyBackHome {
+    margin-bottom: 32px;
+    font-size: 10px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .academyBackHome {
+    transition: none;
+  }
+}
+
+
