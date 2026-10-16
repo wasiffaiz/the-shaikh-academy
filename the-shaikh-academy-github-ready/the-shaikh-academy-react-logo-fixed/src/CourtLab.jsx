@@ -453,31 +453,105 @@ const CHECKLIST = [
   'In doubles, agree serve location and net-player movement before important points.'
 ];
 
-function CourtSketch({ variant, doubles }) {
-  // Schematic patterns, not shot tracking or a claim of a unique solution.
-  const lines = {
-    cross: 'M 96 298 Q 155 192 224 53',
-    line: 'M 92 298 Q 87 178 90 53',
-    middle: 'M 160 298 L 160 53',
-    net: 'M 96 298 Q 125 178 148 130',
-    serve: 'M 198 298 Q 176 214 108 132',
-    general: 'M 105 296 Q 165 180 215 83'
-  };
-  return (
-    <svg className="tacticsSketch" viewBox="0 0 320 350" role="img" aria-label="Illustrative overhead tennis court tactic diagram">
-      <defs><marker id="tacticsArrow" markerWidth="7" markerHeight="7" refX="5" refY="3" orient="auto"><path d="M0 0 L6 3 L0 6" fill="none" stroke="#f2bd96" strokeWidth="1.6" /></marker></defs>
-      <rect x="22" y="12" width="276" height="326" rx="5" fill="#264f47" />
-      <g stroke="#f5f1e7" strokeWidth="2" fill="none" opacity=".85">
-        <rect x="40" y="22" width="240" height="306" />
-        <path d="M68 22V328 M252 22V328 M68 108H252 M68 242H252 M160 108V242 M40 175H280" />
-      </g>
-      <path d={lines[variant] || lines.general} fill="none" stroke="#f2bd96" strokeWidth="3.5" strokeLinecap="round" strokeDasharray="7 7" markerEnd="url(#tacticsArrow)" />
-      <circle cx="96" cy="298" r="9" fill="#d7e99a" stroke="#13242b" strokeWidth="2" />
-      <circle cx="210" cy="56" r="9" fill="#d9b3a3" stroke="#13242b" strokeWidth="2" />
-      {doubles && <><circle cx="224" cy="141" r="8" fill="#d7e99a" stroke="#13242b" strokeWidth="2" /><circle cx="93" cy="130" r="8" fill="#d9b3a3" stroke="#13242b" strokeWidth="2" /></>}
-      <text x="160" y="345" textAnchor="middle" fontSize="8" letterSpacing="2" fill="#e2e8dd">ILLUSTRATIVE COURT VIEW</text>
-    </svg>
+// Court diagrams use a consistent orientation: our team at the bottom, opponents at the top.
+// Only tactics with a clear spatial pattern receive diagrams. Others show coaching guidance.
+const DIAGRAMS = {
+  'singles-1': {kind:'cross',note:'Create width with a deep crosscourt shot before attacking the space.'},
+  'singles-2': {kind:'cross',note:'The diagonal offers more length and a lower net crossing point.'},
+  'singles-3': {kind:'insideout',note:'Inside-out forehand toward the backhand; inside-in is the variation.'},
+  'singles-4': {kind:'cross',note:'Target the identified weaker wing; this example assumes the far right corner.'},
+  'singles-5': {kind:'deep',note:'Prioritise a deep landing area over maximum pace.'},
+  'singles-8': {kind:'line',note:'Change direction down the line when balanced on a suitable ball.'},
+  'singles-9': {kind:'approach',note:'Move forward on the short ball and follow your approach.'},
+  'singles-10': {kind:'approach',note:'Follow a down-the-line approach toward the net.'},
+  'singles-11': {kind:'feet',note:'Make the net player volley low, then look for the passing opportunity.'},
+  'singles-12': {kind:'lob',note:'Lift the ball over an opponent who is crowding the net.'},
+  'singles-13': {kind:'serveplus',note:'Wide serve creates a possible open-court first groundstroke.'},
+  'singles-14': {kind:'bodyserve',note:'Serve toward the returner’s body to restrict their swing.'},
+  'singles-17': {kind:'return',note:'Return deep with control; step in when the serve allows.'},
+  'singles-18': {kind:'middle',note:'A high, deep middle ball limits reply angles.'},
+  'singles-19': {kind:'cross',note:'A defensive crosscourt reply buys recovery time.'},
+  'singles-20': {kind:'middle',note:'Reset with depth, then recover before rebuilding.'},
+  'singles-21': {kind:'behind',note:'Hitting behind an opponent can exploit early anticipation.'},
+  'singles-22': {kind:'drop',note:'Use the drop shot when the opponent is deep and you are balanced.'},
+  'singles-23': {kind:'droplob',note:'Bring the opponent forward, then consider the lob.'},
+  'doubles-1': {kind:'servevolley',note:'Serving team: partner starts at net; server advances when appropriate.'},
+  'doubles-2': {kind:'doublescross',note:'Crosscourt return avoids the opposing net player.'},
+  'doubles-3': {kind:'feet',note:'Direct a low return toward the incoming server’s feet.'},
+  'doubles-4': {kind:'twoup',note:'Both partners take the net with coordinated lateral coverage.'},
+  'doubles-5': {kind:'middlecover',note:'Both partners shift to protect the middle gap.'},
+  'doubles-6': {kind:'poach',note:'The net partner crosses to intercept a predictable return.'},
+  'doubles-7': {kind:'fakepoach',note:'The net player feints toward the middle but stays.'},
+  'doubles-8': {kind:'poach',note:'Planned crossing: the server must cover the vacated side.'},
+  'doubles-9': {kind:'australian',note:'Server and net partner begin on the same half of the court.'},
+  'doubles-10': {kind:'iformation',note:'Net player begins crouched near the centre; direction is agreed beforehand.'},
+  'doubles-11': {kind:'lob',note:'A lob return can pass over an aggressive opposing net player.'},
+  'doubles-12': {kind:'feet',note:'Target the less secure volleyer; this is an illustrative target.'},
+  'doubles-13': {kind:'feet',note:'A low ball at the net player’s feet forces an upward volley.'},
+  'doubles-14': {kind:'middle',note:'A difficult volley through the middle is often the safer option.'},
+  'doubles-16': {kind:'stagger',note:'One partner presses forward; the other covers slightly deeper.'},
+  'doubles-17': {kind:'shift',note:'Partners shift together toward the side where the ball travels.'},
+  'doubles-18': {kind:'middlecover',note:'When a partner is pulled wide, the other protects the centre.'},
+  'doubles-19': {kind:'lobadvance',note:'After a successful offensive lob, both partners move forward.'},
+  'doubles-20': {kind:'lob',note:'Against two net players, a lob is one possible response.'},
+};
+
+function CourtSketch({ tactic }) {
+  const d = DIAGRAMS[tactic.id];
+  if (!d) return (
+    <div className="tacticsDiagramNote">
+      <span>COACHING PRINCIPLE</span>
+      <h3>{tactic.title}</h3>
+      <p>This tactic depends on the incoming ball, opponent and match situation. A single fixed player-position diagram would be misleading.</p>
+      <p>Read the tactical explanation and practise recognising when to apply it.</p>
+    </div>
   );
+  const doubles = tactic.format === 'Doubles';
+  const type = d.kind;
+  // SVG view: y=310 near baseline, y=40 far baseline; y=175 net.
+  let ours = doubles ? [[102,293],[222,128]] : [[110,295]];
+  let theirs = doubles ? [[218,55],[94,125]] : [[212,55]];
+  let paths = [];
+  let movements = [];
+  const add = (x1,y1,x2,y2) => paths.push(`M${x1} ${y1} L${x2} ${y2}`);
+  if (type==='cross' || type==='insideout' || type==='doublescross') add(110,295,222,48);
+  if (type==='line') add(110,295,106,48);
+  if (type==='deep') add(110,295,170,50);
+  if (type==='middle') add(110,295,160,54);
+  if (type==='behind') {theirs=[[226,54]];add(110,295,226,64);movements.push('M226 54 L170 54');}
+  if (type==='approach') {ours=[[110,270]];add(110,270,104,50);movements.push('M110 270 L110 203');}
+  if (type==='drop') {theirs=[[220,40]];add(110,295,220,154);}
+  if (type==='droplob') {theirs=[[220,145]];add(110,295,220,153);paths.push('M110 290 Q160 20 220 45');}
+  if (type==='lob') {if(!doubles) theirs=[[212,115]];paths.push('M110 295 Q150 10 220 50');}
+  if (type==='serveplus') {ours=[[218,310]];theirs=[[215,45]];add(218,310,95,45);paths.push('M125 275 L225 48');}
+  if (type==='bodyserve') {ours=[[218,310]];theirs=[[210,45]];add(218,310,210,45);}
+  if (type==='return') {ours=[[110,300]];theirs=[[212,45]];add(110,300,212,55);}
+  if (type==='servevolley') {ours=[[210,308],[108,125]];theirs=[[112,45],[216,125]];add(210,308,115,55);movements.push('M210 302 L210 224');}
+  if (type==='twoup') {ours=[[103,218],[220,218]];theirs=[[105,55],[219,55]];movements.push('M103 255 L103 215','M220 255 L220 215');}
+  if (type==='middlecover') {ours=[[85,250],[235,250]];theirs=[[106,55],[217,125]];movements.push('M85 250 L130 250','M235 250 L190 250');}
+  if (type==='poach' || type==='fakepoach') {ours=[[105,305],[218,135]];theirs=[[210,55],[100,125]];add(105,305,210,55);movements.push(type==='poach'?'M218 135 L142 135':'M218 135 L180 135');}
+  if (type==='australian') {ours=[[105,307],[123,140]];theirs=[[215,55],[218,140]];}
+  if (type==='iformation') {ours=[[106,307],[160,158]];theirs=[[215,55],[103,130]];}
+  if (type==='stagger') {ours=[[100,215],[223,258]];theirs=[[215,55],[95,130]];}
+  if (type==='shift') {ours=[[108,255],[220,255]];theirs=[[210,55],[100,125]];movements.push('M108 255 L150 255','M220 255 L255 255');add(108,255,240,65);}
+  if (type==='lobadvance') {ours=[[106,295],[220,245]];theirs=[[105,95],[215,105]];paths.push('M106 295 Q165 8 220 50');movements.push('M106 295 L106 210','M220 245 L220 210');}
+  if (type==='feet') {ours=doubles?[[104,305],[219,130]]:[[110,295]];theirs=doubles?[[216,95],[100,128]]:[[215,115]];add(104,295,216,104);}
+  const player=(p,i,team)=><g key={team+i}><circle cx={p[0]} cy={p[1]} r="10" fill={team==='us'?'#dceba3':'#e8a991'} stroke="#10212b" strokeWidth="2"/><text x={p[0]} y={p[1]+3} textAnchor="middle" fontSize="9" fontWeight="700" fill="#13242b">{team==='us'?'A':'B'}{doubles?i+1:''}</text></g>;
+  return <div className="tacticsDiagram">
+    <svg className="tacticsSketch" viewBox="0 0 320 365" role="img" aria-label={`${tactic.title}: overhead schematic showing our team at the bottom and opponents at the top`}>
+      <defs><marker id="tacticsShotArrow" markerWidth="7" markerHeight="7" refX="5" refY="3" orient="auto"><path d="M0 0 L6 3 L0 6" fill="none" stroke="#f2bd96" strokeWidth="1.5" /></marker><marker id="tacticsMoveArrow" markerWidth="7" markerHeight="7" refX="5" refY="3" orient="auto"><path d="M0 0 L6 3 L0 6" fill="none" stroke="#a9dce5" strokeWidth="1.5" /></marker></defs>
+      <rect x="20" y="12" width="280" height="326" rx="4" fill="#264f47" />
+      <g stroke="#f5f1e7" strokeWidth="2" fill="none" opacity=".9"><rect x="38" y="22" width="244" height="306"/><path d="M68 22V328 M252 22V328 M68 108H252 M68 242H252 M160 108V242 M38 175H282"/></g>
+      {paths.map((path,i)=><path key={'p'+i} d={path} fill="none" stroke="#f2bd96" strokeWidth="3" strokeDasharray="6 6" markerEnd="url(#tacticsShotArrow)" />)}
+      {movements.map((path,i)=><path key={'m'+i} d={path} fill="none" stroke="#a9dce5" strokeWidth="2.5" strokeDasharray="4 5" markerEnd="url(#tacticsMoveArrow)" />)}
+      {ours.map((p,i)=>player(p,i,'us'))}{theirs.map((p,i)=>player(p,i,'them'))}
+      <text x="160" y="356" textAnchor="middle" fontSize="9" letterSpacing="1" fill="#e2e8dd">OUR TEAM ↓  |  OPPONENTS ↑</text>
+    </svg>
+    <div className="tacticsLegend"><span><i className="tacticsDotUs"/> Our team (A)</span><span><i className="tacticsDotThem"/> Opponents (B)</span></div>
+    <div className="tacticsLegend"><span><i className="tacticsLineShot"/> Shot</span><span><i className="tacticsLineMove"/> Movement</span></div>
+    <p>{d.note}</p>
+    <small>Teaching schematic; positioning varies with the incoming ball and match situation.</small>
+  </div>;
 }
 
 export default function CourtLab() {
@@ -538,13 +612,14 @@ export default function CourtLab() {
       {current && <div className="tacticsOverlay" role="presentation" onMouseDown={e => { if (e.target === e.currentTarget) closeTactic(); }}>
         <section className="tacticsModal" role="dialog" aria-modal="true" aria-labelledby="tacticsDialogTitle">
           <div className="tacticsModalHeader"><span>{current.format.toUpperCase()} / TACTIC {String(current.number).padStart(2, '0')}</span><button type="button" onClick={closeTactic} aria-label="Close tactic">✕</button></div>
-          <div className="tacticsModalContent"><div className="tacticsModalText"><span className="tacticsCategory">{current.category}</span><h2 id="tacticsDialogTitle">{current.title}</h2><h3>THE TACTIC</h3><p>{current.description}</p><h3>ON-COURT FOCUS</h3><p>Practise recognising the match situation described above, then discuss the decision and positioning with your coach.</p><button type="button" className="tacticsModalSave" onClick={() => toggleSaved(current.id)}>{saved.includes(current.id) ? '★ SAVED TO YOUR LIST' : '☆ SAVE THIS TACTIC'}</button></div><div className="tacticsDiagramWrap"><CourtSketch variant={current.diagram} doubles={current.format === 'Doubles'} /><p>Conceptual court illustration. Player positions and ball paths are not a complete demonstration of this tactic.</p></div></div>
+          <div className="tacticsModalContent"><div className="tacticsModalText"><span className="tacticsCategory">{current.category}</span><h2 id="tacticsDialogTitle">{current.title}</h2><h3>THE TACTIC</h3><p>{current.description}</p><h3>ON-COURT FOCUS</h3><p>Practise recognising the match situation described above, then discuss the decision and positioning with your coach.</p><button type="button" className="tacticsModalSave" onClick={() => toggleSaved(current.id)}>{saved.includes(current.id) ? '★ SAVED TO YOUR LIST' : '☆ SAVE THIS TACTIC'}</button></div><div className="tacticsDiagramWrap"><CourtSketch tactic={current} /></div></div>
           <div className="tacticsModalNav"><button type="button" onClick={() => { const arr = TACTICS.filter(t => t.format === current.format); setSelected(arr[(current.number - 2 + arr.length) % arr.length].id); }}>← PREVIOUS</button><button type="button" onClick={() => { const arr = TACTICS.filter(t => t.format === current.format); setSelected(arr[current.number % arr.length].id); }}>NEXT TACTIC →</button></div>
         </section>
       </div>}
     </main>
   );
 }
+
 
 
 
