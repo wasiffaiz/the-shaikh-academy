@@ -527,7 +527,7 @@ function CourtSketch({ tactic }) {
   if (type==='droplob') {theirs=[[220,145]];add(110,295,220,153);paths.push('M110 290 Q160 20 220 45');}
   if (type==='lob') {theirs=[[212,115]];paths.push('M110 295 Q150 10 220 50');}
   if (type==='serveplus') {ours=[[218,310]];theirs=[[215,45]];add(218,310,95,45);paths.push('M125 275 L225 48');}
-  if (type==='bodyserve') {ours=[[218,310]];theirs=[[210,45]];add(218,310,210,45);}
+  if (type==='bodyserve') {ours=[[218,310]];theirs=[[105,55]];add(218,310,112,125);}
   if (type==='return') {ours=[[110,300]];theirs=[[212,45]];add(110,300,212,55);}
   } else {
     // Each entry: [A1, A2], [B1, B2], shot paths, optional movement arrows.
