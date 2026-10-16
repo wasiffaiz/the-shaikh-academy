@@ -508,12 +508,15 @@ function CourtSketch({ tactic }) {
   );
   const doubles = tactic.format === 'Doubles';
   const type = d.kind;
-  // SVG view: y=310 near baseline, y=40 far baseline; y=175 net.
-  let ours = doubles ? [[102,293],[222,128]] : [[110,295]];
-  let theirs = doubles ? [[218,55],[94,125]] : [[212,55]];
+  // Court orientation: our team ALWAYS below the net (y > 175), opponents above (y < 175).
+  // The four doubles positions are explicitly specified for each illustrated tactic.
+  let ours = doubles ? [[104,305],[218,224]] : [[110,295]];
+  let theirs = doubles ? [[216,48],[102,126]] : [[212,55]];
   let paths = [];
   let movements = [];
   const add = (x1,y1,x2,y2) => paths.push(`M${x1} ${y1} L${x2} ${y2}`);
+
+  if (!doubles) {
   if (type==='cross' || type==='insideout' || type==='doublescross') add(110,295,222,48);
   if (type==='line') add(110,295,106,48);
   if (type==='deep') add(110,295,170,50);
@@ -522,20 +525,102 @@ function CourtSketch({ tactic }) {
   if (type==='approach') {ours=[[110,270]];add(110,270,104,50);movements.push('M110 270 L110 203');}
   if (type==='drop') {theirs=[[220,40]];add(110,295,220,154);}
   if (type==='droplob') {theirs=[[220,145]];add(110,295,220,153);paths.push('M110 290 Q160 20 220 45');}
-  if (type==='lob') {if(!doubles) theirs=[[212,115]];paths.push('M110 295 Q150 10 220 50');}
+  if (type==='lob') {theirs=[[212,115]];paths.push('M110 295 Q150 10 220 50');}
   if (type==='serveplus') {ours=[[218,310]];theirs=[[215,45]];add(218,310,95,45);paths.push('M125 275 L225 48');}
   if (type==='bodyserve') {ours=[[218,310]];theirs=[[210,45]];add(218,310,210,45);}
   if (type==='return') {ours=[[110,300]];theirs=[[212,45]];add(110,300,212,55);}
-  if (type==='servevolley') {ours=[[210,308],[108,125]];theirs=[[112,45],[216,125]];add(210,308,115,55);movements.push('M210 302 L210 224');}
-  if (type==='twoup') {ours=[[103,218],[220,218]];theirs=[[105,55],[219,55]];movements.push('M103 255 L103 215','M220 255 L220 215');}
-  if (type==='middlecover') {ours=[[85,250],[235,250]];theirs=[[106,55],[217,125]];movements.push('M85 250 L130 250','M235 250 L190 250');}
-  if (type==='poach' || type==='fakepoach') {ours=[[105,305],[218,135]];theirs=[[210,55],[100,125]];add(105,305,210,55);movements.push(type==='poach'?'M218 135 L142 135':'M218 135 L180 135');}
-  if (type==='australian') {ours=[[105,307],[123,140]];theirs=[[215,55],[218,140]];}
-  if (type==='iformation') {ours=[[106,307],[160,158]];theirs=[[215,55],[103,130]];}
-  if (type==='stagger') {ours=[[100,215],[223,258]];theirs=[[215,55],[95,130]];}
-  if (type==='shift') {ours=[[108,255],[220,255]];theirs=[[210,55],[100,125]];movements.push('M108 255 L150 255','M220 255 L255 255');add(108,255,240,65);}
-  if (type==='lobadvance') {ours=[[106,295],[220,245]];theirs=[[105,95],[215,105]];paths.push('M106 295 Q165 8 220 50');movements.push('M106 295 L106 210','M220 245 L220 210');}
-  if (type==='feet') {ours=doubles?[[104,305],[219,130]]:[[110,295]];theirs=doubles?[[216,95],[100,128]]:[[215,115]];add(104,295,216,104);}
+  } else {
+    // Each entry: [A1, A2], [B1, B2], shot paths, optional movement arrows.
+    // Shot paths show illustrative trajectories, not predicted match outcomes.
+    const scenarios = {
+      'doubles-1': {
+        a:[[222,307],[104,226]], b:[[102,48],[222,125]],
+        shots:['M222 307 L115 115'], moves:['M222 302 L222 224']
+      },
+      'doubles-2': {
+        a:[[225,305],[100,227]], b:[[105,48],[222,125]],
+        shots:['M225 305 L105 62']
+      },
+      'doubles-3': {
+        a:[[225,305],[100,228]], b:[[105,105],[222,125]],
+        shots:['M225 305 L105 118'], moves:['M105 55 L105 105']
+      },
+      'doubles-4': {
+        a:[[104,220],[220,220]], b:[[105,48],[222,122]],
+        moves:['M104 262 L104 222','M220 262 L220 222']
+      },
+      'doubles-5': {
+        a:[[128,220],[198,224]], b:[[103,48],[223,124]],
+        moves:['M88 220 L128 220','M238 224 L198 224']
+      },
+      'doubles-6': {
+        a:[[222,305],[105,228]], b:[[104,48],[223,125]],
+        shots:['M104 62 L211 270'], moves:['M105 228 L164 219']
+      },
+      'doubles-7': {
+        a:[[222,305],[105,228]], b:[[104,48],[223,125]],
+        shots:['M104 62 L222 265'], moves:['M105 228 L143 220','M143 220 L105 228']
+      },
+      'doubles-8': {
+        a:[[222,305],[105,228]], b:[[104,48],[223,125]],
+        shots:['M104 62 L211 270'], moves:['M105 228 L168 218','M222 305 L102 283']
+      },
+      'doubles-9': {
+        a:[[222,307],[204,232]], b:[[104,48],[222,126]],
+        shots:['M222 307 L105 120']
+      },
+      'doubles-10': {
+        a:[[222,307],[160,234]], b:[[104,48],[222,126]],
+        shots:['M222 307 L105 120'], moves:['M160 234 L112 219']
+      },
+      'doubles-11': {
+        a:[[225,305],[103,229]], b:[[105,48],[222,125]],
+        shots:['M225 305 Q258 118 242 55']
+      },
+      'doubles-12': {
+        a:[[225,305],[103,225]], b:[[105,48],[222,126]],
+        shots:['M225 305 L222 133']
+      },
+      'doubles-13': {
+        a:[[225,305],[103,225]], b:[[105,48],[222,126]],
+        shots:['M225 305 L222 140']
+      },
+      'doubles-14': {
+        a:[[105,221],[223,240]], b:[[105,48],[222,125]],
+        shots:['M105 221 L164 122']
+      },
+      'doubles-16': {
+        a:[[103,218],[223,265]], b:[[105,48],[222,125]]
+      },
+      'doubles-17': {
+        a:[[134,228],[242,235]], b:[[105,48],[222,125]],
+        shots:['M134 228 L235 70'], moves:['M95 228 L134 228','M203 235 L242 235']
+      },
+      'doubles-18': {
+        a:[[82,250],[156,233]], b:[[105,48],[222,125]],
+        moves:['M215 233 L156 233']
+      },
+      'doubles-19': {
+        a:[[104,294],[222,254]], b:[[105,93],[222,108]],
+        shots:['M104 294 Q166 62 222 48'], moves:['M104 294 L104 216','M222 254 L222 215']
+      },
+      'doubles-20': {
+        a:[[104,305],[222,267]], b:[[105,120],[222,120]],
+        shots:['M104 305 Q170 55 230 43']
+      }
+    };
+    const scenario = scenarios[tactic.id];
+    if (scenario) {
+      ours = scenario.a;
+      theirs = scenario.b;
+      paths = scenario.shots || [];
+      movements = scenario.moves || [];
+    }
+  }
+  // Guard against accidentally drawing teammates on opposite sides of the net.
+  if (doubles && (ours.some(([,y]) => y <= 175) || theirs.some(([,y]) => y >= 175))) {
+    console.error('Invalid doubles positions:', tactic.id);
+  }
   const player=(p,i,team)=><g key={team+i}><circle cx={p[0]} cy={p[1]} r="10" fill={team==='us'?'#dceba3':'#e8a991'} stroke="#10212b" strokeWidth="2"/><text x={p[0]} y={p[1]+3} textAnchor="middle" fontSize="9" fontWeight="700" fill="#13242b">{team==='us'?'A':'B'}{doubles?i+1:''}</text></g>;
   return <div className="tacticsDiagram">
     <svg className="tacticsSketch" viewBox="0 0 320 365" role="img" aria-label={`${tactic.title}: overhead schematic showing our team at the bottom and opponents at the top`}>
@@ -619,6 +704,7 @@ export default function CourtLab() {
     </main>
   );
 }
+
 
 
 
