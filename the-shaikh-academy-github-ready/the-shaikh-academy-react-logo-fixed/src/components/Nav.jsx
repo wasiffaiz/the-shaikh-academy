@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from 'react';
 import { Menu, X, ArrowUpRight } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
@@ -34,6 +33,7 @@ export default function Nav() {
     { label: 'Programs', href: '/programs' },
     { label: 'Tactics', href: '/court-lab' },
     { label: 'Exercises', href: '/exercises' },
+    { label: 'Grand Slams', href: '/grand-slams' },
     { label: 'Philosophy', href: '/#philosophy' },
     { label: 'Contact', href: '/#contact' }
   ];
