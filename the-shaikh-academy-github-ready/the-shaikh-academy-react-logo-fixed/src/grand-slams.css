@@ -102,3 +102,58 @@
     background-position: 65% center;
   }
 }
+/* THE SHAIKH ACADEMY — GRAND SLAM WORLD
+   Cinematic refinement overrides, October 2026.
+   Append to END of existing src/grand-slams.css.
+   Do not replace the original stylesheet with this file.
+*/
+
+/* Make the real stadium visible on the right, while preserving legible copy. */
+.gs-page .gs-hero {
+  position: relative;
+  isolation: isolate;
+  background-color: #091725;
+  background-image:
+    linear-gradient(90deg,
+      rgba(7,18,31,.97) 0%,
+      rgba(7,18,31,.91) 24%,
+      rgba(7,18,31,.70) 45%,
+      rgba(7,18,31,.36) 68%,
+      rgba(7,18,31,.18) 100%),
+    linear-gradient(0deg, rgba(7,18,31,.65) 0%, transparent 34%),
+    url('/assets/grand-slam-hero.png');
+  background-size: cover;
+  background-position: center 52%;
+  background-repeat: no-repeat;
+}
+
+/* Respect any existing hero graphics and buttons; no layout overrides. */
+.gs-page .gs-hero :is(h1, h2, p, a, button) {
+  position: relative;
+}
+
+/* Enhance the four photographic tournament tiles without changing content. */
+.gs-page :is(.gs-tournament-card, .gs-slam-card) {
+  transition: transform .3s ease, box-shadow .3s ease;
+}
+@media (hover: hover) and (pointer: fine) {
+  .gs-page :is(.gs-tournament-card, .gs-slam-card):hover {
+    transform: translateY(-3px);
+    box-shadow: 0 16px 38px rgba(0,0,0,.24);
+  }
+}
+
+@media (max-width: 768px) {
+  .gs-page .gs-hero {
+    background-image:
+      linear-gradient(90deg, rgba(7,18,31,.93), rgba(7,18,31,.69)),
+      linear-gradient(0deg, rgba(7,18,31,.66), transparent 48%),
+      url('/assets/grand-slam-hero.png');
+    background-position: 60% center;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .gs-page :is(.gs-tournament-card, .gs-slam-card) {
+    transition: none;
+  }
+}
