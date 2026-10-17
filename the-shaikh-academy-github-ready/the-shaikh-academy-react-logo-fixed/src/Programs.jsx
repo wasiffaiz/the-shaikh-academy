@@ -150,7 +150,7 @@ const fade = {
 
 export default function Programs() {
   const [activeStage, setActiveStage] = useState(0);
-  useEffect(()=>{if(window.location.hash==='#six-stages'){const frame=requestAnimationFrame(()=>{document.getElementById('six-stages')?.scrollIntoView({behavior:'instant',block:'start'});});return()=>cancelAnimationFrame(frame);}},[]);
+  useEffect(()=>{if(window.location.hash==='#six-stages'){const frame=requestAnimationFrame(()=>{document.getElementById('six-stages')?.scrollIntoView({behavior:'auto',block:'start'});});return()=>cancelAnimationFrame(frame);}},[]);
 
 
   return (
@@ -183,7 +183,7 @@ export default function Programs() {
             EXPLORE OUR PROGRAMS <ArrowUpRight size={17}/>
           </a>
         </motion.div>
-        <span className="programsHeroIndex">IND / GER / GBR</span>
+        <span className="programsHeroIndex" aria-hidden="true">IND / GER / GBR</span>
       </section>
 
       <section id="our-programs" className="programsSection">
@@ -208,9 +208,9 @@ export default function Programs() {
                 <small>{program.focus}</small>
               </div>
               <Link
-                to="/book"
+                to={`/book?program=${encodeURIComponent(program.name.toLowerCase().replace(/(^|\s)\S/g, letter => letter.toUpperCase()))}`}
                 className="programArrow"
-                aria-label={`Enquire about ${program.name}`}
+                aria-label={`Request ${program.name.toLowerCase()} coaching`}
               >
                 <ArrowUpRight size={24}/>
               </Link>
@@ -255,6 +255,7 @@ export default function Programs() {
                   className="methodStageTrigger"
                   onClick={() => setActiveStage(open ? -1 : index)}
                   aria-expanded={open}
+                  type="button"
                   aria-controls={`stage-${index}`}
                 >
                   <span className="methodStageNumber">{stage.number}</span>
@@ -328,3 +329,4 @@ export default function Programs() {
     </main>
   );
 }
+
