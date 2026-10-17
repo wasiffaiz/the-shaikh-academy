@@ -1,4 +1,3 @@
-
 .bookPage{background:#f4f2ed;color:#111820;min-height:100vh}
 .bookPage *{box-sizing:border-box}
 .bookPage a{text-decoration:none;color:inherit}
@@ -65,3 +64,20 @@
 }
 /* STEP 10.5 — MOBILE BOOKING OPTIMISATION */@media(max-width:600px){.bookPage{width:100%;overflow-x:clip}.bookNav{gap:10px}.bookBrand{min-width:0;font-size:9px;letter-spacing:.08em}.bookBrand img{flex-shrink:0}.bookNav nav{gap:10px;font-size:9px}.bookHero{padding:75px 6% 85px}.bookHero h1{font-size:clamp(44px,11vw,70px);overflow-wrap:break-word}.bookHero p{font-size:15px;line-height:1.7}.bookContent{grid-template-columns:minmax(0,1fr);gap:45px;padding:65px 5% 80px}.bookIntro{min-width:0}.bookIntro h2{font-size:clamp(43px,12vw,55px)}.bookSteps{margin:35px 0}.bookSteps div{line-height:1.6}.bookForm{min-width:0;padding:30px 20px}.bookFormHeading{padding-bottom:25px;margin-bottom:28px}.bookFormGrid{grid-template-columns:minmax(0,1fr);gap:24px}.bookField{gap:10px}.bookField label{font-size:11px;line-height:1.5}.bookField input,.bookField select,.bookField textarea{font-size:16px;min-height:48px;padding:12px 0}.bookField textarea{min-height:110px}.bookField input:focus-visible,.bookField select:focus-visible,.bookField textarea:focus-visible{outline:2px solid #a66f4e;outline-offset:3px}.bookPrivacy{line-height:1.7}.bookSubmit{min-height:56px;padding:17px 20px;font-size:11px;line-height:1.5}.bookSuccess,.bookError{align-items:flex-start;overflow-wrap:anywhere}.bookBottom{padding:75px 6% 85px}.bookBottom h2{font-size:clamp(46px,12vw,75px)}.bookFooter{gap:18px;line-height:1.7}}@media(max-width:380px){.bookNav nav{gap:7px;font-size:8px}.bookBrand{font-size:8px}.bookBrand img{width:40px;height:38px}.bookForm{padding:25px 16px}.bookHero h1{font-size:11vw}}
 
+
+/* 2026 refinement: booking form polish and accessibility */
+.bookPage{overflow-x:clip}
+.bookPage :is(a,button,input,select,textarea):focus-visible{outline:3px solid #b9754f;outline-offset:3px}
+.bookPage .bookBrand img{object-fit:contain;display:block;object-position:center}
+.bookPage .bookForm{border:1px solid rgba(16,26,40,.06);border-radius:4px}
+.bookPage .bookField :is(input,select,textarea){transition:border-color .2s ease,background-color .2s ease}
+.bookPage .bookField :is(input,select,textarea):hover{border-bottom-color:#6e7a82}
+.bookPage .bookField :is(input,select,textarea):focus-visible{border-bottom-color:#a66f4e}
+.bookPage .bookField select{cursor:pointer}
+.bookPage .bookField input[readonly]{background:#f5f3ef;color:#4e5960;padding-inline:12px;border-radius:3px;cursor:default}
+.bookPage .bookSubmit{min-height:54px;transition:background-color .2s ease,transform .2s ease}
+.bookPage .bookSubmit:not(:disabled):hover{transform:translateY(-2px)}
+.bookPage .bookSteps div{line-height:1.6}
+.bookPage .bookSuccess,.bookPage .bookError{overflow-wrap:anywhere}
+@media(max-width:700px){.bookPage .bookForm{padding:clamp(18px,5vw,30px)}.bookPage .bookField :is(input,select,textarea){font-size:16px}.bookPage .bookBrand img{object-fit:contain}}
+@media(prefers-reduced-motion:reduce){.bookPage *, .bookPage *::before,.bookPage *::after{scroll-behavior:auto!important;transition-duration:.01ms!important;animation-duration:.01ms!important}}
