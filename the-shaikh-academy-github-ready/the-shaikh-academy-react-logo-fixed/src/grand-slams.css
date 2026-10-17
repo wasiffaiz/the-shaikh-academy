@@ -157,3 +157,16 @@
     transition: none;
   }
 }
+/* Remove old GS, tennis ball and court decorations */
+
+.gs-hero::before,
+.gs-hero::after,
+.gs-hero-art,
+.gs-hero-visual,
+.gs-hero-orbit,
+.gs-hero-court,
+.gs-hero-ball,
+.gs-hero-monogram,
+.gs-hero-decoration {
+  display: none !important;
+}
