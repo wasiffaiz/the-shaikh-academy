@@ -60,3 +60,19 @@
 }
 
 
+
+/* 2026 premium finish: shared clarity, touch targets and reduced-motion support */
+.performancePage{overflow-x:clip}
+.performanceHero{position:relative;isolation:isolate;min-height:clamp(420px,55vh,660px);display:flex;flex-direction:column;justify-content:center}
+.performanceHero::before{content:"";position:absolute;inset:0;z-index:-1;pointer-events:none;background:radial-gradient(ellipse at 83% 23%,rgba(227,177,142,.13),transparent 48%),linear-gradient(120deg,#101a28 15%,#172b3d 100%)}
+.performanceHero h1{max-width:1050px;text-wrap:balance}
+.performancePage button{min-height:40px}
+.performancePage a:focus-visible{outline:2px solid #e3b18e;outline-offset:4px}
+.performancePage :is(input,select){min-width:0}
+.performancePage :is(.performanceCard,.performanceExerciseCard,.performanceCategoryCard){transition:transform .22s ease,border-color .22s ease,box-shadow .22s ease}
+@media(hover:hover){.performancePage :is(.performanceCard,.performanceExerciseCard,.performanceCategoryCard):hover{box-shadow:0 16px 36px rgba(16,26,40,.10)}}
+@media(max-width:620px){.performanceHero{min-height:440px;padding-top:105px;padding-bottom:62px}.performanceHero h1{letter-spacing:-1.5px}}
+@media(prefers-reduced-motion:reduce){.performancePage *,.performancePage *::before,.performancePage *::after{scroll-behavior:auto!important;animation-duration:.01ms!important;transition-duration:.01ms!important}}
+
+
+
