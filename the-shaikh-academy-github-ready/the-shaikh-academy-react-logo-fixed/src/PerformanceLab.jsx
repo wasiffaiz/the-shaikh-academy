@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 import { Search, X, ArrowUpRight, ArrowLeft, ArrowRight, Bookmark, Dumbbell, MapPin } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import './performance-lab.css';
@@ -925,6 +925,8 @@ export default function PerformanceLab() {
     } catch { return []; }
   });
   const [activeId, setActiveId] = useState(null);
+  const dialogRef = useRef(null);
+  const returnFocusRef = useRef(null);
   const active = EXERCISES.find(item => item.id === activeId) || null;
   const activeIndex = EXERCISES.findIndex(item => item.id === activeId);
 
@@ -935,13 +937,21 @@ export default function PerformanceLab() {
     if (!active) return;
     const previousOverflow = document.body.style.overflow;
     document.body.style.overflow = 'hidden';
+    dialogRef.current?.querySelector('button')?.focus();
     const handleKey = event => {
-      if (event.key === 'Escape') setActiveId(null);
+      if (event.key === 'Escape') { setActiveId(null); return; }
+      if (event.key === 'Tab' && dialogRef.current) {
+        const controls = [...dialogRef.current.querySelectorAll('button:not([disabled]), a[href], input:not([disabled])')];
+        if (controls.length) {
+          if (event.shiftKey && document.activeElement === controls[0]) { event.preventDefault(); controls[controls.length - 1].focus(); }
+          else if (!event.shiftKey && document.activeElement === controls[controls.length - 1]) { event.preventDefault(); controls[0].focus(); }
+        }
+      }
       if (event.key === 'ArrowRight') setActiveId(EXERCISES[(activeIndex + 1) % EXERCISES.length].id);
       if (event.key === 'ArrowLeft') setActiveId(EXERCISES[(activeIndex - 1 + EXERCISES.length) % EXERCISES.length].id);
     };
     window.addEventListener('keydown', handleKey);
-    return () => { document.body.style.overflow = previousOverflow; window.removeEventListener('keydown', handleKey); };
+    return () => { document.body.style.overflow = previousOverflow; window.removeEventListener('keydown', handleKey); returnFocusRef.current?.focus(); };
   }, [activeId, activeIndex, active]);
 
   const filtered = useMemo(() => EXERCISES.filter(item => {
@@ -994,7 +1004,7 @@ export default function PerformanceLab() {
             <div className="performanceExerciseTop"><span>{item.id.toUpperCase()} / {categoryName(item.category).toUpperCase()}</span><button type="button" className={'performanceSave' + (saved.includes(item.id) ? ' isSaved' : '')} onClick={() => toggleSaved(item.id)} aria-label={(saved.includes(item.id) ? 'Remove saved ' : 'Save ') + item.title} aria-pressed={saved.includes(item.id)}><Bookmark size={19} fill={saved.includes(item.id) ? 'currentColor' : 'none'} /></button></div>
             <div className="performancePills"><span>{item.environment === 'Gym' ? <Dumbbell size={12} /> : <MapPin size={12} />}{item.environment}</span><span>{item.level}</span></div>
             <h3>{item.title}</h3><p>{item.purpose}</p><div className="performanceDose"><span>STARTING VOLUME</span><strong>{item.dose}</strong></div>
-            <button className="performanceRead" type="button" onClick={() => setActiveId(item.id)}>VIEW EXERCISE <ArrowUpRight size={18}/></button>
+            <button className="performanceRead" type="button" onClick={event => { returnFocusRef.current = event.currentTarget; setActiveId(item.id); }}>VIEW EXERCISE <ArrowUpRight size={18}/></button>
           </article>)}</div> : <div className="performanceEmpty">No exercises match your filters. <button type="button" onClick={resetFilters}>Show all exercises</button></div>}
         </div>
       </section>
@@ -1003,7 +1013,7 @@ export default function PerformanceLab() {
       <footer className="performanceFooter"><strong>THE SHAIKH ACADEMY</strong><span>THREE COACHES. ONE LEGACY.</span></footer>
 
       {active && <div className="performanceOverlay" onMouseDown={event => { if (event.target === event.currentTarget) setActiveId(null); }}>
-        <section className="performanceModal" role="dialog" aria-modal="true" aria-label={active.title}>
+        <section className="performanceModal" ref={dialogRef} tabIndex={-1} role="dialog" aria-modal="true" aria-label={active.title}>
           <div className="performanceModalHeader"><span>PERFORMANCE LAB / {active.id.toUpperCase()}</span><button type="button" onClick={() => setActiveId(null)} aria-label="Close exercise details"><X size={23}/></button></div>
           <div className="performanceModalBody"><div className="performanceModalMain"><p className="performanceEyebrow">{categoryName(active.category).toUpperCase()} / {active.environment.toUpperCase()}</p><h2>{active.title}</h2><p className="performanceModalPurpose">{active.purpose}</p><div className="performanceModalStats"><div><span>LEVEL</span><strong>{active.level}</strong></div><div><span>SETS / REPS</span><strong>{active.dose}</strong></div><div><span>REST</span><strong>{active.rest}</strong></div><div><span>EQUIPMENT</span><strong>{active.equipment}</strong></div></div><h3>HOW TO PERFORM</h3><ol>{active.steps.map((step,i) => <li key={i}>{step}</li>)}</ol><h3>COACHING CUE</h3><p>{active.cue}</p><h3>SAFETY & MODIFICATION</h3><p>{active.caution}</p><button className="performanceModalSave" type="button" onClick={() => toggleSaved(active.id)}><Bookmark size={16} fill={saved.includes(active.id) ? 'currentColor' : 'none'}/>{saved.includes(active.id) ? ' SAVED TO MY EXERCISES' : ' SAVE THIS EXERCISE'}</button></div><aside className="performanceModalAside"><span>THE SHAIKH ACADEMY</span><strong>QUALITY BEFORE QUANTITY.</strong><p>The suggested sets and repetitions are general starting points, not an individual programme. Adjust for age, ability, recovery and total tennis load.</p><p>Warm up before intense exercise. Stop if an exercise causes pain; persistent symptoms should be assessed by an appropriate clinician.</p></aside></div>
           <div className="performanceModalNav"><button type="button" onClick={() => setActiveId(EXERCISES[(activeIndex - 1 + EXERCISES.length) % EXERCISES.length].id)}><ArrowLeft size={17}/> PREVIOUS</button><span>{activeIndex + 1} / {EXERCISES.length}</span><button type="button" onClick={() => setActiveId(EXERCISES[(activeIndex + 1) % EXERCISES.length].id)}>NEXT <ArrowRight size={17}/></button></div>
@@ -1012,4 +1022,5 @@ export default function PerformanceLab() {
     </main>
   );
 }
+
 
