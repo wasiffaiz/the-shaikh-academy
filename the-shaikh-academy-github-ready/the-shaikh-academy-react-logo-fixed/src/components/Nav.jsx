@@ -33,7 +33,7 @@ export default function Nav() {
     { label: 'Programs', href: '/programs' },
     { label: 'Tactics', href: '/court-lab' },
     { label: 'Exercises', href: '/exercises' },
-    { label: 'Grand Slams', href: '/grand-slams' },
+    { label: 'Grand Slam World', href: '/grand-slams' },
     { label: 'Philosophy', href: '/#philosophy' },
     { label: 'Contact', href: '/#contact' }
   ];
