@@ -1,4 +1,3 @@
-
 .programsPage{background:#f4f2ed;color:#111820;min-height:100vh}
 .programsPage *{box-sizing:border-box}
 .programsPage a{text-decoration:none;color:inherit}
@@ -85,3 +84,19 @@
 .programsFooter{padding:30px 6%;flex-wrap:wrap}
 /* SIX STAGES — ANCHOR SCROLL */#six-stages{scroll-margin-top:100px}
 }
+
+/* 2026 refinement: accessible, consistent finishing details */
+.programsPage{overflow-x:clip}
+.programsPage :is(a,button):focus-visible{outline:3px solid #b9754f;outline-offset:5px}
+.programsPage :is(.programsNavBook,.programsHeroLink,.programArrow,.programsCTA a){transition:background-color .2s ease,color .2s ease,transform .2s ease,border-color .2s ease}
+.programsPage :is(.programsNavBook,.programsCTA a):hover{transform:translateY(-2px)}
+.programsPage .programsBrand img{object-position:center;display:block}
+.programsPage .programItem{align-items:start}
+.programsPage .programArrow{min-width:44px;min-height:44px}
+.programsPage .programDetails{min-width:0}
+.programsPage .programDetails p{max-width:68ch}
+.programsPage .methodStageTrigger{min-height:64px}
+.programsPage .methodStageTrigger:hover .methodStageTitle{color:#a7663f}
+#six-stages,#our-programs{scroll-margin-top:110px}
+@media(max-width:700px){.programsPage .programArrow{width:44px;height:44px}.programsPage .programItem{grid-template-columns:30px minmax(0,1fr) 44px;gap:12px}.programsPage .programsCountries{flex-wrap:wrap;line-height:1.6}.programsPage .programsBrand img{object-fit:contain}}
+@media(prefers-reduced-motion:reduce){.programsPage *, .programsPage *::before,.programsPage *::after{scroll-behavior:auto!important;transition-duration:.01ms!important;animation-duration:.01ms!important}}
