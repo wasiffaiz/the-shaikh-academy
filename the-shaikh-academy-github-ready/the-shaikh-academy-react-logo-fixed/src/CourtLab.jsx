@@ -1,4 +1,4 @@
-import React, { useMemo, useState } from 'react';
+import React, { useEffect, useMemo, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 import './court-lab.css';
 
@@ -645,7 +645,34 @@ export default function CourtLab() {
   const [category, setCategory] = useState('All');
   const [search, setSearch] = useState('');
   const [selected, setSelected] = useState(null);
-  const [saved, setSaved] = useState([]);
+  const [saved, setSaved] = useState(() => {
+    try {
+      const stored = JSON.parse(window.localStorage.getItem('shaikh-saved-tactics') || '[]');
+      return Array.isArray(stored) ? stored.filter(id => typeof id === 'string') : [];
+    } catch { return []; }
+  });
+  const dialogRef = useRef(null);
+  const returnFocusRef = useRef(null);
+  useEffect(() => {
+    try { window.localStorage.setItem('shaikh-saved-tactics', JSON.stringify(saved)); } catch { /* private mode */ }
+  }, [saved]);
+  useEffect(() => {
+    if (!selected) return;
+    const previousOverflow = document.body.style.overflow;
+    document.body.style.overflow = 'hidden';
+    dialogRef.current?.querySelector('button')?.focus();
+    const onKeyDown = event => {
+      if (event.key === 'Escape') setSelected(null);
+      if (event.key !== 'Tab' || !dialogRef.current) return;
+      const controls = [...dialogRef.current.querySelectorAll('button:not([disabled]), a[href], input:not([disabled]), select:not([disabled])')];
+      if (!controls.length) return;
+      const first = controls[0], last = controls[controls.length - 1];
+      if (event.shiftKey && document.activeElement === first) { event.preventDefault(); last.focus(); }
+      else if (!event.shiftKey && document.activeElement === last) { event.preventDefault(); first.focus(); }
+    };
+    document.addEventListener('keydown', onKeyDown);
+    return () => { document.body.style.overflow = previousOverflow; document.removeEventListener('keydown', onKeyDown); returnFocusRef.current?.focus(); };
+  }, [selected]);
   const categories = useMemo(() => ['All', ...new Set(TACTICS.filter(t => t.format === format).map(t => t.category))], [format]);
   const filtered = useMemo(() => TACTICS.filter(t =>
     t.format === format && (category === 'All' || t.category === category) &&
@@ -654,7 +681,7 @@ export default function CourtLab() {
   const current = TACTICS.find(t => t.id === selected) || null;
   const switchFormat = value => { setFormat(value); setCategory('All'); setSelected(null); };
   const toggleSaved = id => setSaved(prev => prev.includes(id) ? prev.filter(x => x !== id) : [...prev, id]);
-  const openTactic = id => { setSelected(id); };
+  const openTactic = id => { returnFocusRef.current = document.activeElement; setSelected(id); };
   const closeTactic = () => setSelected(null);
   return (
     <main className="tacticsPage">
@@ -663,24 +690,24 @@ export default function CourtLab() {
           <span aria-hidden="true">←</span>
           BACK TO HOME
         </Link>
-        <div className="tacticsEyebrow"><img src="/assets/legacy-logo.png" alt="Logo" style={{width:30,height:30,objectFit:'contain',verticalAlign:'middle',marginRight:12}} />THE SHAIKH ACADEMY <span>/</span> TENNIS EDUCATION</div>
+        <div className="tacticsEyebrow"><img src="/assets/legacy-logo.png" alt="" aria-hidden="true" style={{width:30,height:30,objectFit:'contain',verticalAlign:'middle',marginRight:12}} />THE SHAIKH ACADEMY <span>/</span> TENNIS EDUCATION</div>
         <h1>TACTICAL<br /><em>INTELLIGENCE.</em></h1>
         <p className="tacticsTagline">PLAY SMARTER. WIN MORE.</p>
         <p className="tacticsLead">A practical collection of singles and doubles match patterns, positioning principles and decisions — built from our Tennis Tactics Playbook.</p>
-        <div className="tacticsMetrics"><span><strong>28</strong> SINGLES TACTICS</span><span><strong>21</strong> DOUBLES TACTICS</span><span><strong>49</strong> TOTAL LESSONS</span></div>
+        <div className="tacticsMetrics"><span><strong>{TACTICS.filter(t => t.format === 'Singles').length}</strong> SINGLES TACTICS</span><span><strong>{TACTICS.filter(t => t.format === 'Doubles').length}</strong> DOUBLES TACTICS</span><span><strong>{TACTICS.length}</strong> TOTAL LESSONS</span></div>
       </section>
 
       <section className="tacticsBody" aria-label="Tactics library">
         <div className="tacticsTopline"><span>EXPLORE THE PLAYBOOK</span><span>01 — TACTICAL LIBRARY</span></div>
         <div className="tacticsFormatTabs" role="group" aria-label="Match format">
-          {['Singles', 'Doubles'].map(f => <button key={f} type="button" className={format === f ? 'active' : ''} aria-pressed={format === f} onClick={() => switchFormat(f)}>{f.toUpperCase()} <span>{f === 'Singles' ? '28' : '21'}</span></button>)}
+          {['Singles', 'Doubles'].map(f => <button key={f} type="button" className={format === f ? 'active' : ''} aria-pressed={format === f} onClick={() => switchFormat(f)}>{f.toUpperCase()} <span>{TACTICS.filter(t => t.format === f).length}</span></button>)}
         </div>
         <p className="tacticsRule">{format === 'Singles' ? 'DEFENSIVE BALL — SURVIVE  /  NEUTRAL BALL — BUILD  /  SHORT BALL — ATTACK  /  EASY BALL — FINISH' : 'PROTECT THE MIDDLE  /  MOVE TOGETHER  /  COMMUNICATE BEFORE THE POINT  /  TAKE THE NET WHEN POSSIBLE'}</p>
         <div className="tacticsTools">
           <label className="tacticsSearch"><span className="srOnly">Search tactics</span><input type="search" placeholder="Search tactics, patterns or situations..." value={search} onChange={e => setSearch(e.target.value)} /></label>
           <label className="tacticsSelect"><span className="srOnly">Filter by category</span><select value={category} onChange={e => setCategory(e.target.value)}>{categories.map(c => <option key={c} value={c}>{c === 'All' ? 'All categories' : c}</option>)}</select></label>
         </div>
-        <div className="tacticsCount">SHOWING {filtered.length} OF {format === 'Singles' ? 28 : 21} TACTICS</div>
+        <div className="tacticsCount">SHOWING {filtered.length} OF {TACTICS.filter(t => t.format === format).length} TACTICS</div>
         <div className="tacticsGrid">
           {filtered.map(t => <article className="tacticsCard" key={t.id}>
             <div className="tacticsCardTop"><span>{String(t.number).padStart(2, '0')} / {t.format.toUpperCase()}</span><button type="button" className={'tacticsSave ' + (saved.includes(t.id) ? 'isSaved' : '')} onClick={() => toggleSaved(t.id)} aria-label={saved.includes(t.id) ? 'Remove from saved tactics' : 'Save tactic'} aria-pressed={saved.includes(t.id)}>{saved.includes(t.id) ? '★' : '☆'}</button></div>
@@ -700,7 +727,7 @@ export default function CourtLab() {
       <footer className="tacticsFooter"><div style={{display:'flex',alignItems:'center',gap:'12px'}}><img src="/assets/legacy-logo.png" alt="The Shaikh Academy logo" style={{width:'38px',height:'38px',objectFit:'contain'}}/><span>THE SHAIKH ACADEMY</span></div><span>THREE COACHES. ONE LEGACY.</span></footer>
 
       {current && <div className="tacticsOverlay" role="presentation" onMouseDown={e => { if (e.target === e.currentTarget) closeTactic(); }}>
-        <section className="tacticsModal" role="dialog" aria-modal="true" aria-labelledby="tacticsDialogTitle">
+        <section className="tacticsModal" role="dialog" aria-modal="true" aria-labelledby="tacticsDialogTitle" ref={dialogRef} tabIndex={-1}>
           <div className="tacticsModalHeader"><span>{current.format.toUpperCase()} / TACTIC {String(current.number).padStart(2, '0')}</span><button type="button" onClick={closeTactic} aria-label="Close tactic">✕</button></div>
           <div className="tacticsModalContent"><div className="tacticsModalText"><span className="tacticsCategory">{current.category}</span><h2 id="tacticsDialogTitle">{current.title}</h2><h3>THE TACTIC</h3><p>{current.description}</p><h3>ON-COURT FOCUS</h3><p>Practise recognising the match situation described above, then discuss the decision and positioning with your coach.</p><button type="button" className="tacticsModalSave" onClick={() => toggleSaved(current.id)}>{saved.includes(current.id) ? '★ SAVED TO YOUR LIST' : '☆ SAVE THIS TACTIC'}</button></div><div className="tacticsDiagramWrap"><CourtSketch tactic={current} /></div></div>
           <div className="tacticsModalNav"><button type="button" onClick={() => { const arr = TACTICS.filter(t => t.format === current.format); setSelected(arr[(current.number - 2 + arr.length) % arr.length].id); }}>← PREVIOUS</button><button type="button" onClick={() => { const arr = TACTICS.filter(t => t.format === current.format); setSelected(arr[current.number % arr.length].id); }}>NEXT TACTIC →</button></div>
@@ -709,8 +736,6 @@ export default function CourtLab() {
     </main>
   );
 }
-
-
 
 
 
