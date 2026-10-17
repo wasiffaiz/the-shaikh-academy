@@ -1,6 +1,5 @@
-
 import { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useSearchParams } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { ArrowUpRight, ArrowLeft, CheckCircle2 } from 'lucide-react';
 import './book.css';
@@ -27,6 +26,12 @@ const reveal = {
 };
 
 export default function Book() {
+  const [searchParams] = useSearchParams();
+  const requestedProgram = searchParams.get('program');
+  const initialProgram = programs.find(item => item.toLowerCase() === requestedProgram?.toLowerCase()) || '';
+  const [program, setProgram] = useState(initialProgram);
+  const todayLocal = new Date();
+  const localDate = [todayLocal.getFullYear(), String(todayLocal.getMonth() + 1).padStart(2, '0'), String(todayLocal.getDate()).padStart(2, '0')].join('-');
   const [country, setCountry] = useState('');
   const [status, setStatus] = useState('idle');
   const [errorMessage, setErrorMessage] = useState('');
@@ -38,6 +43,7 @@ export default function Book() {
 
     data.coach = coachByCountry[data.country] || '';
 
+    if (status === 'sending') return;
     setStatus('sending');
     setErrorMessage('');
 
@@ -54,6 +60,7 @@ export default function Book() {
 
       form.reset();
       setCountry('');
+      setProgram('');
       setStatus('success');
     } catch (error) {
       setErrorMessage('Your request could not be sent. Please email info@theshaikhacademy.com.');
@@ -108,7 +115,7 @@ export default function Book() {
           </p>
         </motion.div>
 
-        <motion.form {...reveal} className="bookForm" onSubmit={handleSubmit}>
+        <motion.form {...reveal} className="bookForm" onSubmit={handleSubmit} aria-label="Coaching booking enquiry">
           <div className="bookFormHeading">
             <span className="bookEyebrow">PLAYER DETAILS</span>
             <h3>THE FIRST STEP.</h3>
@@ -117,17 +124,17 @@ export default function Book() {
           <div className="bookFormGrid">
             <div className="bookField">
               <label htmlFor="bookName">FULL NAME *</label>
-              <input id="bookName" name="name" type="text" required maxLength="120" />
+              <input id="bookName" name="name" type="text" autoComplete="name" required maxLength="120" />
             </div>
 
             <div className="bookField">
               <label htmlFor="bookEmail">EMAIL ADDRESS *</label>
-              <input id="bookEmail" name="email" type="email" required />
+              <input id="bookEmail" name="email" type="email" autoComplete="email" required />
             </div>
 
             <div className="bookField">
               <label htmlFor="bookPhone">PHONE / WHATSAPP</label>
-              <input id="bookPhone" name="phone" type="tel" />
+              <input id="bookPhone" name="phone" type="tel" autoComplete="tel" />
             </div>
 
             <div className="bookField">
@@ -142,7 +149,7 @@ export default function Book() {
                 name="country"
                 required
                 value={country}
-                onChange={e => setCountry(e.target.value)}
+                onChange={e => { setCountry(e.target.value); if (status !== 'idle') setStatus('idle'); }}
               >
                 <option value="">SELECT COUNTRY</option>
                 <option value="India">India</option>
@@ -162,7 +169,7 @@ export default function Book() {
 
             <div className="bookField">
               <label htmlFor="bookProgram">COACHING PROGRAM *</label>
-              <select id="bookProgram" name="program" required defaultValue="">
+              <select id="bookProgram" name="program" required value={program} onChange={e => setProgram(e.target.value)}>
                 <option value="" disabled>SELECT PROGRAM</option>
                 {programs.map(program => (
                   <option key={program} value={program}>{program}</option>
@@ -187,7 +194,7 @@ export default function Book() {
                 id="bookDate"
                 name="preferredDate"
                 type="date"
-                min={new Date().toLocaleDateString('en-CA')}
+                min={localDate}
               />
             </div>
 
@@ -207,6 +214,7 @@ export default function Book() {
                 id="bookGoals"
                 name="goals"
                 rows="4"
+                maxLength="3000"
                 required
                 placeholder="Tell us what you'd like to improve or achieve."
               />
@@ -218,6 +226,7 @@ export default function Book() {
                 id="bookMessage"
                 name="message"
                 rows="3"
+                maxLength="3000"
                 placeholder="Anything else we should know?"
               />
             </div>
@@ -239,7 +248,7 @@ export default function Book() {
           </button>
 
           {status === 'success' && (
-            <p className="bookSuccess" role="status">
+            <p className="bookSuccess" role="status" aria-live="polite">
               <CheckCircle2 size={19}/>
               REQUEST RECEIVED — WE'LL BE IN TOUCH.
             </p>
@@ -270,3 +279,4 @@ export default function Book() {
     </main>
   );
 }
+
