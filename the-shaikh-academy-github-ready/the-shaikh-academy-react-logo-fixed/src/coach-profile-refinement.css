@@ -1,0 +1,37 @@
+/* Coach profile refinement: scoped styles; existing global CSS remains intact. */
+.academyCoachPage{--ac-navy:#101a28;--ac-clay:#b77954;--ac-cream:#f4f2ed;background:var(--ac-cream);color:var(--ac-navy);overflow-x:clip}
+.academyCoachPage a:focus-visible,.academyCoachMissing a:focus-visible{outline:3px solid var(--ac-clay,#b77954);outline-offset:5px}
+.academyCoachTopline{display:flex;justify-content:space-between;align-items:center;gap:24px;padding:26px clamp(24px,6vw,104px) 0;color:#6e7278;font-size:10px;letter-spacing:.16em;font-weight:600}
+.academyCoachBack{display:inline-flex;align-items:center;gap:10px;color:var(--ac-navy);transition:color .2s}
+.academyCoachBack:hover{color:var(--ac-clay)}
+.academyCoachHero{display:grid;grid-template-columns:minmax(0,1.06fr) minmax(0,.94fr);gap:clamp(40px,7vw,120px);align-items:center;max-width:1600px;margin:0 auto;padding:clamp(35px,5vw,75px) clamp(24px,6vw,104px) clamp(75px,9vw,145px)}
+.academyCoachPhoto{position:relative;width:100%;height:auto;min-height:0;aspect-ratio:4/5;background:#d7d5d0;overflow:hidden}
+.academyCoachPhoto img{display:block;width:100%;height:100%;object-fit:cover;object-position:center 30%;transition:transform .8s cubic-bezier(.22,1,.36,1)}
+.academyCoachPhoto:hover img{transform:scale(1.035)}
+.academyCoachPhotoIndex{position:absolute;bottom:20px;left:22px;color:white;text-shadow:0 2px 12px #000a;font-size:11px;font-weight:600;letter-spacing:.18em}
+.academyCoachContent{min-width:0}
+.academyCoachKicker{font-size:10px!important;font-weight:700;letter-spacing:.23em!important;line-height:1.6;color:var(--ac-clay)!important;text-transform:uppercase;margin:0 0 24px!important}
+.academyCoachContent h1{font-size:clamp(50px,6.4vw,112px);line-height:.95;letter-spacing:-.065em;font-weight:400;margin:0 0 23px;overflow-wrap:anywhere}
+.academyCoachLocation{display:inline-flex;align-items:center;gap:8px;font-size:12px;letter-spacing:.08em;color:#636a72}
+.academyCoachRule{height:1px;background:#cfcac2;margin:clamp(26px,4vw,48px) 0}
+.academyCoachContent .coachProfileQuote{font-size:clamp(25px,2.7vw,39px);line-height:1.3;margin:0 0 26px;color:var(--ac-navy)}
+.academyCoachContent .academyCoachDescription{max-width:540px;font-size:15px;line-height:1.9;color:#515862;margin:0 0 32px}
+.academyCoachEducation{display:flex;flex-direction:column;gap:7px;padding:20px 0;border-top:1px solid #d8d3ca;max-width:540px}
+.academyCoachEducation span{font-size:10px;letter-spacing:.18em;font-weight:700;color:#7a7e82}
+.academyCoachEducation strong{font-size:14px;font-weight:500}
+.academyCoachBook{display:inline-flex;align-items:center;justify-content:center;gap:16px;min-height:52px;margin-top:24px;padding:16px 22px;background:var(--ac-navy);color:#fff;font-size:11px;font-weight:700;letter-spacing:.14em;transition:background .2s,transform .2s}
+.academyCoachBook:hover{background:var(--ac-clay);transform:translateY(-2px)}
+.academyCoachFooter{max-width:1600px;margin:0 auto;padding:55px clamp(24px,6vw,104px) 110px;border-top:1px solid #d6d1c8}
+.academyCoachFooterIntro h2{font-size:clamp(32px,4.5vw,65px);line-height:1.1;letter-spacing:-.05em;font-weight:400;margin:0 0 35px}
+.academyCoachNextLinks{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:20px;margin:0}
+.academyCoachNextLinks a{display:flex;flex-direction:column;gap:18px;padding:25px 0;border-top:1px solid #aeb0ae;border-bottom:0;transition:color .2s,border-color .2s}
+.academyCoachNextLinks a:hover{color:var(--ac-clay);border-color:var(--ac-clay)}
+.academyCoachNextMeta{font-size:10px;letter-spacing:.16em;color:#72777b}
+.academyCoachNextName{display:flex;align-items:center;justify-content:space-between;gap:12px;font-size:clamp(23px,2.5vw,36px);letter-spacing:-.04em}
+.academyCoachMissing{min-height:65vh;padding:clamp(80px,10vw,160px) 7vw;background:#f4f2ed;color:#101a28}
+.academyCoachMissing h1{font-size:clamp(42px,6vw,84px);font-weight:400;letter-spacing:-.05em;margin:0 0 20px}
+.academyCoachMissing p:not(.academyCoachKicker){color:#555;line-height:1.7}
+.academyCoachMissing a{display:inline-flex;align-items:center;gap:10px;margin-top:25px;font-size:12px;letter-spacing:.12em;border-bottom:1px solid;padding-bottom:10px}
+@media(max-width:900px){.academyCoachHero{grid-template-columns:1fr;gap:38px}.academyCoachPhoto{max-width:700px;aspect-ratio:4/4.7}.academyCoachContent h1{font-size:clamp(50px,10vw,88px)}.academyCoachTopline{padding-top:22px}}
+@media(max-width:600px){.academyCoachTopline>span{display:none}.academyCoachHero{padding-top:25px;padding-bottom:70px}.academyCoachPhoto{aspect-ratio:4/5}.academyCoachContent h1{font-size:clamp(48px,13vw,72px)}.academyCoachNextLinks{grid-template-columns:1fr}.academyCoachFooter{padding-bottom:70px}.academyCoachBook{width:100%}}
+@media(prefers-reduced-motion:reduce){.academyCoachPhoto img,.academyCoachBook,.academyCoachNextLinks a{transition:none!important}.academyCoachPhoto:hover img{transform:none}.academyCoachBook:hover{transform:none}}
