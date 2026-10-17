@@ -170,3 +170,190 @@
 .gs-hero-decoration {
   display: none !important;
 }
+/* ============================================================
+   THE SHAIKH ACADEMY — GRAND SLAM WORLD
+   Tournament photography polish (October 2026)
+   Uses the existing JSX class names. No new assets required.
+   ============================================================ */
+
+/* Four premium photographic tournament cards */
+.gs-page .gs-event-grid {
+  gap: clamp(12px, 1.6vw, 22px);
+}
+.gs-page .gs-event-card {
+  min-height: 490px;
+  border: 1px solid rgba(244,242,237,.22);
+  border-radius: 5px;
+  background-color: #15273a;
+  box-shadow: 0 16px 42px rgba(0,0,0,.20);
+  isolation: isolate;
+  transition: transform .38s ease, border-color .38s ease, box-shadow .38s ease;
+}
+/* The overlay belongs above the photo, but below the labels. */
+.gs-page .gs-event-card::after {
+  content: '';
+  display: block;
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  opacity: 1;
+  pointer-events: none;
+  background: linear-gradient(180deg,
+    rgba(4,12,22,.12) 0%,
+    rgba(4,12,22,.02) 33%,
+    rgba(4,12,22,.34) 58%,
+    rgba(4,12,22,.94) 100%);
+}
+.gs-page .gs-event-photo {
+  z-index: 0;
+  opacity: 1;
+  background-size: cover;
+  background-position: center center;
+  filter: saturate(1.08) contrast(1.035);
+  transform: scale(1);
+  transition: transform .75s cubic-bezier(.2,.7,.2,1), filter .5s ease;
+}
+.gs-page .gs-event-info {
+  z-index: 2;
+  background: none;
+  padding: 28px 24px 30px;
+}
+.gs-page .gs-event-info h3 {
+  font-size: clamp(27px,2.35vw,36px);
+  line-height: 1.12;
+  text-shadow: 0 2px 18px rgba(0,0,0,.28);
+}
+.gs-page .gs-event-info p { color: #edf1f3; }
+.gs-page .gs-event-info b {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  color: #f2c5a6;
+}
+.gs-page .gs-event-index {
+  z-index: 2;
+  border: 1px solid rgba(255,255,255,.55);
+  border-radius: 2px;
+  background: rgba(7,18,31,.52);
+  backdrop-filter: blur(8px);
+}
+@media (hover:hover) and (pointer:fine) {
+  .gs-page .gs-event-card:hover {
+    transform: translateY(-7px);
+    border-color: rgba(227,177,142,.8);
+    box-shadow: 0 28px 58px rgba(0,0,0,.34);
+  }
+  .gs-page .gs-event-card:hover .gs-event-photo {
+    transform: scale(1.075);
+    filter: saturate(1.16) contrast(1.055);
+  }
+}
+.gs-page .gs-event-card:focus-visible {
+  outline: 2px solid var(--gs-clay);
+  outline-offset: 5px;
+}
+
+/* Tournament detail photography: clearer court, readable text */
+.gs-page .gs-event-detail {
+  isolation: isolate;
+  border-radius: 5px;
+}
+.gs-page .gs-event-detail-photo {
+  z-index: 0;
+  opacity: 1;
+  background-size: cover;
+  background-position: center;
+  filter: saturate(1.07);
+}
+.gs-page .gs-event-detail::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  background: linear-gradient(90deg,
+    rgba(7,18,31,.96) 0%,
+    rgba(7,18,31,.86) 34%,
+    rgba(7,18,31,.53) 68%,
+    rgba(7,18,31,.18) 100%);
+}
+.gs-page .gs-event-detail-body {
+  z-index: 2;
+}
+
+/* Preserve the clean stadium hero and hide the old decorations */
+.gs-page .gs-hero::before,
+.gs-page .gs-hero::after,
+.gs-page .gs-hero-shine,
+.gs-page .gs-hero-court,
+.gs-page .gs-hero-ball,
+.gs-page .gs-hero-art,
+.gs-page .gs-hero-visual,
+.gs-page .gs-hero-orbit,
+.gs-page .gs-hero-monogram,
+.gs-page .gs-hero-decoration { display: none !important; }
+
+@media (max-width:1050px) {
+  .gs-page .gs-event-card { min-height: 430px; }
+}
+@media (max-width:720px) {
+  .gs-page .gs-event-grid { gap: 12px; }
+  .gs-page .gs-event-card { min-height: 360px; }
+  .gs-page .gs-event-info { padding: 22px 19px 23px; }
+  .gs-page .gs-event-detail::after {
+    background: linear-gradient(90deg,rgba(7,18,31,.94),rgba(7,18,31,.65));
+  }
+}
+@media (max-width:430px) {
+  .gs-page .gs-event-card { min-height: 345px; }
+  .gs-page .gs-event-info h3 { font-size: 33px; }
+}
+@media (prefers-reduced-motion:reduce) {
+  .gs-page .gs-event-card,
+  .gs-page .gs-event-photo { transition: none !important; }
+}
+
+/* HERO CLEANUP — remove all CSS-generated lines and decorative overlays.
+   The stadium photograph itself remains unchanged. */
+.gs-page .gs-hero::before,
+.gs-page .gs-hero::after,
+.gs-page .gs-hero-shine,
+.gs-page .gs-hero-shine::before,
+.gs-page .gs-hero-shine::after,
+.gs-page .gs-hero-court,
+.gs-page .gs-hero-court::before,
+.gs-page .gs-hero-court::after,
+.gs-page .gs-hero-ball,
+.gs-page .gs-hero-art,
+.gs-page .gs-hero-visual,
+.gs-page .gs-hero-orbit,
+.gs-page .gs-hero-monogram,
+.gs-page .gs-hero-decoration {
+  display: none !important;
+  content: none !important;
+}
+.gs-page .gs-hero-stats {
+  border-top: 0;
+  padding-top: 0;
+}
+.gs-page .gs-hero {
+  background-image:
+    linear-gradient(90deg,
+      rgba(7,18,31,.97) 0%,
+      rgba(7,18,31,.91) 24%,
+      rgba(7,18,31,.70) 45%,
+      rgba(7,18,31,.36) 68%,
+      rgba(7,18,31,.18) 100%),
+    url('/assets/grand-slam-hero.png');
+  background-size: cover;
+  background-position: center 52%;
+  background-repeat: no-repeat;
+}
+@media (max-width: 768px) {
+  .gs-page .gs-hero {
+    background-image:
+      linear-gradient(90deg,rgba(7,18,31,.93),rgba(7,18,31,.69)),
+      url('/assets/grand-slam-hero.png');
+    background-position: 60% center;
+  }
+}
